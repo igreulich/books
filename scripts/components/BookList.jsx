@@ -38,6 +38,7 @@ module.exports = React.createClass({
               <thead>
                 <tr>
                   <th className='table-name'>Book <span className='pull-right'><a href='#' onClick={this.props.onAsecSort}><span className='glyphicon glyphicon-chevron-up'></span></a><a href='#' onClick={this.props.onDescSort}><span className='glyphicon glyphicon-chevron-down' aria-hidden='true'></span></a></span></th>
+                  <th className='table-position'>Author</th>
                 </tr>
               </thead>
               <tbody>

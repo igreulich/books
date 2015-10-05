@@ -11,6 +11,7 @@ module.exports = React.createClass({
     return (
       <tr>
         <td>{this.props.book.name} <span className="pull-right" style={spanStyles}><a href='#' onClick={this.edit}>edit</a> | <a href='#' onClick={this.destroy}>delete</a></span></td>
+        <td>{this.props.book.author}</td>
       </tr>
     );
   },

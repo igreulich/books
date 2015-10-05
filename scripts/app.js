@@ -168,7 +168,9 @@
 	  submit: function submit(book) {
 	    this.state.ref.push({
 	      id: Date.now(),
-	      name: book.name });
+	      name: book.name,
+	      author: book.author
+	    });
 	  },
 
 	  asecSort: function asecSort() {
@@ -456,6 +458,11 @@
 	                      React.createElement("span", { className: "glyphicon glyphicon-chevron-down", "aria-hidden": "true" })
 	                    )
 	                  )
+	                ),
+	                React.createElement(
+	                  "th",
+	                  { className: "table-position" },
+	                  "Author"
 	                )
 	              )
 	            ),
@@ -508,6 +515,11 @@
 	            "delete"
 	          )
 	        )
+	      ),
+	      React.createElement(
+	        "td",
+	        null,
+	        this.props.book.author
 	      )
 	    );
 	  },
@@ -541,7 +553,8 @@
 	  getInitialState: function getInitialState() {
 	    return {
 	      id: this.props.book.id,
-	      name: this.props.book.name
+	      name: this.props.book.name,
+	      author: this.props.book.author
 	    };
 	  },
 
@@ -552,7 +565,12 @@
 	      React.createElement(
 	        "td",
 	        null,
-	        React.createElement(Input, { type: "text", ref: "bookName", value: this.state.name, onChange: this.onNameChange }),
+	        React.createElement(Input, { type: "text", ref: "bookName", value: this.state.name, onChange: this.onNameChange })
+	      ),
+	      React.createElement(
+	        "td",
+	        null,
+	        React.createElement(Input, { type: "text", ref: "bookAuthor", value: this.state.author, onChange: this.onAuthorChange }),
 	        React.createElement(
 	          "span",
 	          { className: "pull-right" },
@@ -568,6 +586,10 @@
 
 	  onNameChange: function onNameChange(event) {
 	    this.setState({ name: event.target.value });
+	  },
+
+	  onAuthorChange: function onAuthorChange(event) {
+	    this.setState({ author: event.target.value });
 	  },
 
 	  update: function update(event) {
@@ -596,7 +618,8 @@
 
 	  getInitialState: function getInitialState() {
 	    return {
-	      name: ""
+	      name: "",
+	      author: ""
 	    };
 	  },
 
@@ -623,8 +646,13 @@
 	              null,
 	              React.createElement(
 	                Col,
-	                { xs: 12 },
+	                { xs: 6 },
 	                React.createElement(Input, { type: "text", ref: "bookName", placeholder: "Enter book", onChange: this.onNameChange, value: this.state.name })
+	              ),
+	              React.createElement(
+	                Col,
+	                { xs: 6 },
+	                React.createElement(Input, { type: "text", ref: "bookAuthor", placeholder: "Enter author", onChange: this.onAuthorChange, value: this.state.author })
 	              )
 	            )
 	          ),
@@ -644,13 +672,19 @@
 	    this.props.onSubmit(this.state);
 
 	    this.setState({
-	      name: ""
+	      name: "",
+	      author: ""
 	    });
 	  },
 
 	  onNameChange: function onNameChange(event) {
 	    this.setState({ name: event.target.value });
+	  },
+
+	  onAuthorChange: function onAuthorChange(event) {
+	    this.setState({ author: event.target.value });
 	  }
+
 	});
 
 /***/ }

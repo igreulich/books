@@ -13,7 +13,8 @@ module.exports = React.createClass({
 
   getInitialState() {
     return {
-      name: ''
+      name:   '',
+      author: ''
     };
   },
 
@@ -29,8 +30,11 @@ module.exports = React.createClass({
           <form onSubmit={this.submit}>
             <Input label="New Book" wrapperClassName="wrapper">
               <Row>
-                <Col xs={12}>
+                <Col xs={6}>
                   <Input type='text' ref='bookName' placeholder='Enter book' onChange={this.onNameChange} value={this.state.name} />
+                </Col>
+                <Col xs={6}>
+                  <Input type='text' ref='bookAuthor' placeholder='Enter author' onChange={this.onAuthorChange} value={this.state.author} />
                 </Col>
               </Row>
             </Input>
@@ -47,11 +51,17 @@ module.exports = React.createClass({
     this.props.onSubmit(this.state);
 
     this.setState({
-      name:      ''
+      name:   '',
+      author: ''
     });
   },
 
   onNameChange(event) {
     this.setState({name: event.target.value})
+  },
+
+  onAuthorChange(event) {
+    this.setState({author: event.target.value})
   }
+
 });

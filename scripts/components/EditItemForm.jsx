@@ -7,8 +7,9 @@ module.exports = React.createClass({
 
   getInitialState() {
     return {
-      id:   this.props.book.id,
-      name: this.props.book.name
+      id:     this.props.book.id,
+      name:   this.props.book.name,
+      author: this.props.book.author
     }
   },
 
@@ -17,6 +18,9 @@ module.exports = React.createClass({
       <tr>
         <td>
           <Input type='text' ref="bookName" value={this.state.name} onChange={this.onNameChange} />
+        </td>
+        <td>
+          <Input type='text' ref="bookAuthor" value={this.state.author} onChange={this.onAuthorChange} />
           <span className="pull-right"><a href="#" onClick={this.update}>save</a></span>
         </td>
       </tr>
@@ -25,6 +29,10 @@ module.exports = React.createClass({
 
   onNameChange(event) {
     this.setState({name: event.target.value})
+  },
+
+  onAuthorChange(event) {
+    this.setState({author: event.target.value})
   },
 
   update(event) {
