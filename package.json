@@ -1,14 +1,13 @@
 {
-  "name": "games",
+  "name": "books",
   "version": "0.0.1",
-  "description": "A list of all the games I own",
+  "description": "A list of all the books I own",
   "main": "./index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "games",
-    "boardgames"
+    "books"
   ],
   "author": "Ian Greulich",
   "license": "MIT",

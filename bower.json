@@ -1,17 +1,16 @@
 {
-  "name": "games",
+  "name": "books",
   "version": "0.0.1",
   "authors": [
     "Ian Greulich <ian@greulich.me>"
   ],
-  "description": "A list of all the games I own",
+  "description": "A list of all the books I own",
   "main": "./index.html",
   "moduleType": [
     "es6"
   ],
   "keywords": [
-    "games",
-    "boardgames"
+    "books"
   ],
   "license": "MIT",
   "ignore": [
