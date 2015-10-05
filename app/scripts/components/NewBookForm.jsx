@@ -13,11 +13,7 @@ module.exports = React.createClass({
 
   getInitialState() {
     return {
-      coop:      '',
-      link:      '',
-      name:      '',
-      players:   '',
-      expansion: ''
+      name: ''
     };
   },
 

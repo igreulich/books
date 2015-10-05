@@ -8,7 +8,7 @@ module.exports = React.createClass({
   getInitialState() {
     return {
       id:   this.props.book.id,
-      name: this.props.book.name,
+      name: this.props.book.name
     }
   },
 
