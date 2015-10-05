@@ -1,7 +1,7 @@
 module.exports = {
-  entry: './app/scripts/components/GameApp.jsx',
+  entry: './app/scripts/components/App.jsx',
   output: {
-		path: './app/scripts',
+    path: './app/scripts',
     filename: 'app.js'
   },
   module: {
@@ -9,9 +9,9 @@ module.exports = {
       { test: /\.jsx$/, loader: 'babel-loader' }
     ]
   },
-	resolve: {
-		extensions: ['', '.js', '.jsx']
-	},
+  resolve: {
+    extensions: ['', '.js', '.jsx']
+  },
   externals: {
     'react-bootstrap': 'ReactBootstrap'
   }

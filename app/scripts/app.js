@@ -47,32 +47,32 @@
 	"use strict";
 
 	var Nav = __webpack_require__(1);
-	var GameList = __webpack_require__(2);
-	var NewGameForm = __webpack_require__(3);
+	var BookList = __webpack_require__(3);
+	var NewBookForm = __webpack_require__(6);
 
-	var GameApp = React.createClass({
-	  displayName: "GameApp",
+	var BookApp = React.createClass({
+	  displayName: "BookApp",
 
 	  mixins: [ReactFireMixin],
 
 	  getInitialState: function getInitialState() {
 	    return {
 	      uid: "",
-	      ref: new Firebase("https://gogames.firebaseio.com/items/"),
-	      games: [],
+	      ref: new Firebase("https://gobooks.firebaseio.com/items/"),
+	      books: [],
 	      query: "",
-	      searchGames: [],
+	      searchBooks: [],
 	      errorMessage: ""
 	    };
 	  },
 
 	  componentWillMount: function componentWillMount() {
-	    this.bindAsArray(this.state.ref, "games");
-	    this.bindAsArray(this.state.ref, "searchGames");
+	    this.bindAsArray(this.state.ref, "books");
+	    this.bindAsArray(this.state.ref, "searchBooks");
 	  },
 
 	  componentWillUnmount: function componentWillUnmount() {
-	    this.unbind("games");
+	    this.unbind("books");
 	  },
 
 	  render: function render() {
@@ -80,8 +80,8 @@
 	      "div",
 	      null,
 	      React.createElement(Nav, { user: this.state.uid, query: this.state.query, onLogin: this.login, onLogout: this.logout, onSearch: this.search }),
-	      React.createElement(GameList, { user: this.state.uid, games: this.state.games, onEdit: this.edit, onUpdate: this.update, onDestroy: this.destroy, onAsecSort: this.asecSort, onDescSort: this.descSort }),
-	      React.createElement(NewGameForm, { user: this.state.uid, onSubmit: this.submit })
+	      React.createElement(BookList, { user: this.state.uid, books: this.state.books, onEdit: this.edit, onUpdate: this.update, onDestroy: this.destroy, onAsecSort: this.asecSort, onDescSort: this.descSort }),
+	      React.createElement(NewBookForm, { user: this.state.uid, onSubmit: this.submit })
 	    );
 	  },
 
@@ -112,72 +112,72 @@
 	  },
 
 	  search: function search(query) {
-	    var games = this.state.searchGames;
+	    var books = this.state.searchBooks;
 	    var results = [];
 
-	    games.forEach(function (game) {
-	      if (game.name.toLowerCase().indexOf(query.toLowerCase()) !== -1) {
-	        results.push(game);
+	    books.forEach(function (book) {
+	      if (book.name.toLowerCase().indexOf(query.toLowerCase()) !== -1) {
+	        results.push(book);
 	      }
 	    });
 
 	    this.setState({
 	      query: query,
-	      games: results
+	      books: results
 	    });
 	  },
 
-	  edit: function edit(game) {
-	    var games = this.state.games;
+	  edit: function edit(book) {
+	    var books = this.state.books;
 
-	    var editIndex = games.indexOf(game);
+	    var editIndex = book.indexOf(book);
 
-	    games[editIndex].isEditing = true;
+	    books[editIndex].isEditing = true;
 
-	    this._updateItems(games);
+	    this._updateItems(books);
 	  },
 
-	  update: function update(game) {
-	    var games = this.state.games;
+	  update: function update(book) {
+	    var books = this.state.book;
 
-	    var originalGame = games.filter(function (element) {
-	      return element.id === game.id;
+	    var originalBook = books.filter(function (element) {
+	      return element.id === book.id;
 	    });
 
-	    originalGame = originalGame[0];
+	    originalBook = originalBook[0];
 
-	    var editIndex = games.indexOf(originalGame);
+	    var editIndex = books.indexOf(originalBook);
 
-	    game.isEditing = false;
+	    book.isEditing = false;
 
-	    games[editIndex] = game;
+	    books[editIndex] = book;
 
-	    this._updateItems(games);
+	    this._updateItems(books);
 	  },
 
-	  destroy: function destroy(game) {
-	    var games = this.state.games;
+	  destroy: function destroy(book) {
+	    var books = this.state.books;
 
-	    var newGames = games.filter(function (element) {
-	      return element.id !== game.id;
+	    var newBooks = books.filter(function (element) {
+	      return element.id !== book.id;
 	    });
 
-	    this._updateItems(newGames);
+	    this._updateItems(newBooks);
 	  },
 
-	  submit: function submit(game) {
+	  submit: function submit(book) {
 	    this.state.ref.push({
 	      id: Date.now(),
-	      name: game.name,
-	      coop: game.coop,
-	      link: game.link,
-	      players: game.players,
-	      expansion: game.expansion
+	      name: book.name,
+	      coop: book.coop,
+	      link: book.link,
+	      players: book.players,
+	      expansion: book.expansion
 	    });
 	  },
 
 	  asecSort: function asecSort() {
-	    var games = this.state.games;
+	    var books = this.state.books;
 
 	    var comparator = function (a, b) {
 	      var sort = 0;
@@ -193,12 +193,12 @@
 	    };
 
 	    this.setState({
-	      games: games.sort(comparator)
+	      books: books.sort(comparator)
 	    });
 	  },
 
 	  descSort: function descSort() {
-	    var games = this.state.games;
+	    var books = this.state.books;
 
 	    var comparator = function (a, b) {
 	      var sort = 0;
@@ -214,22 +214,22 @@
 	    };
 
 	    this.setState({
-	      games: games.sort(comparator)
+	      books: books.sort(comparator)
 	    });
 	  },
 
-	  _updateItems: function _updateItems(games) {
+	  _updateItems: function _updateItems(books) {
 	    var ref = this.state.ref;
 
-	    ref.set(games);
+	    ref.set(books);
 
 	    this.setState({
-	      searchItems: games
+	      searchItems: books
 	    });
 	  }
 	});
 
-	React.render(React.createElement(GameApp, null), document.getElementById("app"));
+	React.render(React.createElement(App, null), document.getElementById("app"));
 
 /***/ },
 /* 1 */
@@ -237,171 +237,174 @@
 
 	"use strict";
 
-	var _require = __webpack_require__(4);
+	var _require = __webpack_require__(2);
 
 	var Grid = _require.Grid;
 	var Row = _require.Row;
 	var Col = _require.Col;
 
 	module.exports = React.createClass({
-		displayName: "Nav",
+	  displayName: "Nav",
 
-		render: function render() {
-			var authLink;
-			var liStyles = {
-				visibility: "hidden"
-			};
+	  render: function render() {
+	    var authLink;
+	    var liStyles = {
+	      visibility: "hidden"
+	    };
 
-			if (this.props.user) {
-				authLink = React.createElement(
-					"li",
-					null,
-					React.createElement(
-						"a",
-						{ href: "#", onClick: this.logout },
-						"Sign Out"
-					)
-				);
-			} else {
-				authLink = React.createElement(
-					"li",
-					null,
-					React.createElement(
-						"a",
-						{ href: "#", onClick: this.login },
-						"Sign In"
-					)
-				);
-			}
+	    if (this.props.user) {
+	      authLink = React.createElement(
+	        "li",
+	        null,
+	        React.createElement(
+	          "a",
+	          { href: "#", onClick: this.logout },
+	          "Sign Out"
+	        )
+	      );
+	    } else {
+	      authLink = React.createElement(
+	        "li",
+	        null,
+	        React.createElement(
+	          "a",
+	          { href: "#", onClick: this.login },
+	          "Sign In"
+	        )
+	      );
+	    }
 
-			return React.createElement(
-				"header",
-				{ className: "header" },
-				React.createElement(
-					Grid,
-					null,
-					React.createElement(
-						Row,
-						null,
-						React.createElement(
-							Col,
-							{ md: 6 },
-							React.createElement(
-								"div",
-								{ className: "logo-white" },
-								React.createElement("img", { src: "images/logo-white.png" }),
-								React.createElement(
-									"h3",
-									null,
-									"GAMES"
-								)
-							)
-						),
-						React.createElement(
-							Col,
-							{ md: 6, className: "nav-wrapper" },
-							React.createElement(
-								"nav",
-								{ className: "navbar navbar-inverse navbar-static-top", role: "navigation" },
-								React.createElement(
-									"div",
-									{ className: "navbar-header" },
-									React.createElement(
-										"button",
-										{ type: "button", className: "navbar-toggle collapsed", "data-toggle": "collapse", "data-target": "#bs-example-navbar-collapse-1" },
-										React.createElement(
-											"span",
-											{ className: "sr-only" },
-											"Toggle navigation"
-										),
-										React.createElement("span", { className: "icon-bar" }),
-										React.createElement("span", { className: "icon-bar" }),
-										React.createElement("span", { className: "icon-bar" })
-									)
-								),
-								React.createElement(
-									"div",
-									{ className: "collapse navbar-collapse", id: "bs-example-navbar-collapse-1" },
-									React.createElement(
-										"ul",
-										{ className: "nav navbar-nav" },
-										React.createElement(
-											"li",
-											{ style: liStyles },
-											React.createElement(
-												"a",
-												{ href: "#" },
-												"Profile"
-											)
-										),
-										authLink
-									),
-									React.createElement(
-										"form",
-										null,
-										React.createElement("input", { type: "text", name: "search", ref: "search", placeholder: "Search", value: this.props.query, onChange: this.search }),
-										React.createElement("input", { type: "image", src: "images/icon-search.png", alt: "Submit" })
-									)
-								)
-							)
-						)
-					)
-				)
-			);
-		},
+	    return React.createElement(
+	      "header",
+	      { className: "header" },
+	      React.createElement(
+	        Grid,
+	        null,
+	        React.createElement(
+	          Row,
+	          null,
+	          React.createElement(
+	            Col,
+	            { md: 6 },
+	            React.createElement(
+	              "div",
+	              { className: "logo-white" },
+	              React.createElement("img", { src: "images/logo-white.png" }),
+	              React.createElement(
+	                "h3",
+	                null,
+	                "BOOKS"
+	              )
+	            )
+	          ),
+	          React.createElement(
+	            Col,
+	            { md: 6, className: "nav-wrapper" },
+	            React.createElement(
+	              "nav",
+	              { className: "navbar navbar-inverse navbar-static-top", role: "navigation" },
+	              React.createElement(
+	                "div",
+	                { className: "navbar-header" },
+	                React.createElement(
+	                  "button",
+	                  { type: "button", className: "navbar-toggle collapsed", "data-toggle": "collapse", "data-target": "#bs-example-navbar-collapse-1" },
+	                  React.createElement(
+	                    "span",
+	                    { className: "sr-only" },
+	                    "Toggle navigation"
+	                  ),
+	                  React.createElement("span", { className: "icon-bar" }),
+	                  React.createElement("span", { className: "icon-bar" }),
+	                  React.createElement("span", { className: "icon-bar" })
+	                )
+	              ),
+	              React.createElement(
+	                "div",
+	                { className: "collapse navbar-collapse", id: "bs-example-navbar-collapse-1" },
+	                React.createElement(
+	                  "ul",
+	                  { className: "nav navbar-nav" },
+	                  React.createElement(
+	                    "li",
+	                    { style: liStyles },
+	                    React.createElement(
+	                      "a",
+	                      { href: "#" },
+	                      "Profile"
+	                    )
+	                  ),
+	                  authLink
+	                ),
+	                React.createElement(
+	                  "form",
+	                  null,
+	                  React.createElement("input", { type: "text", name: "search", ref: "search", placeholder: "Search", value: this.props.query, onChange: this.search }),
+	                  React.createElement("input", { type: "image", src: "images/icon-search.png", alt: "Submit" })
+	                )
+	              )
+	            )
+	          )
+	        )
+	      )
+	    );
+	  },
 
-		login: function login() {
-			this.props.onLogin();
-		},
+	  login: function login() {
+	    this.props.onLogin();
+	  },
 
-		logout: function logout() {
-			this.props.onLogout();
-		},
+	  logout: function logout() {
+	    this.props.onLogout();
+	  },
 
-		search: function search() {
-			var query = this.refs.search.getDOMNode().value;
+	  search: function search() {
+	    var query = this.refs.search.getDOMNode().value;
 
-			this.props.onSearch(query);
-		}
+	    this.props.onSearch(query);
+	  }
 	});
 
 /***/ },
 /* 2 */
+/***/ function(module, exports) {
+
+	module.exports = ReactBootstrap;
+
+/***/ },
+/* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	var GameItem = __webpack_require__(5);
-	var EditItem = __webpack_require__(6);
-	var SelectedModal = __webpack_require__(7);
+	var BookItem = __webpack_require__(4);
+	var EditItem = __webpack_require__(5);
 
-	var _require = __webpack_require__(4);
+	var _require = __webpack_require__(2);
 
 	var Grid = _require.Grid;
 	var Row = _require.Row;
-	var Button = _require.Button;
-	var ModalTrigger = _require.ModalTrigger;
 
 	module.exports = React.createClass({
-	  displayName: "GameList",
+	  displayName: "BookList",
 
 	  getInitialState: function getInitialState() {
 	    return {
-	      selectedGame: ""
+	      selectedBook: ""
 	    };
 	  },
 
 	  render: function render() {
 	    var _this = this;
 
-	    var gameAction = function (game) {
-	      if (game.isEditing) {
-	        return React.createElement(EditItem, { key: game.id, game: game, onUpdate: _this.props.onUpdate });
+	    var bookAction = function (book) {
+	      if (book.isEditing) {
+	        return React.createElement(EditItem, { key: book.id, book: book, onUpdate: _this.props.onUpdate });
 	      } else {
-	        return React.createElement(GameItem, { key: game.id, game: game, user: _this.props.user, onEdit: function () {
-	            return _this.props.onEdit(game);
+	        return React.createElement(BookItem, { key: book.id, book: book, user: _this.props.user, onEdit: function () {
+	            return _this.props.onEdit(book);
 	          }, onDestroy: function () {
-	            return _this.props.onDestroy(game);
+	            return _this.props.onDestroy(book);
 	          } });
 	      }
 	    };
@@ -418,30 +421,15 @@
 	          React.createElement(
 	            "h3",
 	            { className: "pull-left" },
-	            "Greulich's Games"
+	            "Greulich's Books"
 	          ),
 	          React.createElement(
 	            "h4",
 	            { className: "pull-right" },
 	            "Total: ",
-	            this.props.games.length
+	            this.props.books.length
 	          ),
 	          React.createElement("div", { className: "clearfix" })
-	        ),
-	        React.createElement(
-	          Row,
-	          null,
-	          React.createElement(
-	            ModalTrigger,
-	            { modal: React.createElement(SelectedModal, { game: this.state.selectedGame }) },
-	            React.createElement(
-	              Button,
-	              { className: "pull-right btn-default", type: "button", onClick: function () {
-	                  return _this.choose();
-	                } },
-	              "Choose a game"
-	            )
-	          )
 	        ),
 	        React.createElement(
 	          Row,
@@ -458,7 +446,7 @@
 	                React.createElement(
 	                  "th",
 	                  { className: "table-name" },
-	                  "Game ",
+	                  "Book ",
 	                  React.createElement(
 	                    "span",
 	                    { className: "pull-right" },
@@ -473,55 +461,134 @@
 	                      React.createElement("span", { className: "glyphicon glyphicon-chevron-down", "aria-hidden": "true" })
 	                    )
 	                  )
-	                ),
-	                React.createElement(
-	                  "th",
-	                  { className: "table-position" },
-	                  "Players"
-	                ),
-	                React.createElement(
-	                  "th",
-	                  { className: "table-points" },
-	                  "Co-op"
-	                ),
-	                React.createElement(
-	                  "th",
-	                  { className: "table-points" },
-	                  "Type"
 	                )
 	              )
 	            ),
 	            React.createElement(
 	              "tbody",
 	              null,
-	              this.props.games.map(gameAction)
+	              this.props.books.map(bookAction)
 	            )
+	          )
+	        )
+	      )
+	    );
+	  }
+	});
+
+/***/ },
+/* 4 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	module.exports = React.createClass({
+	  displayName: "BookItem",
+
+	  render: function render() {
+	    var spanStyles = {
+	      display: this.props.user ? "" : "none"
+	    };
+
+	    return React.createElement(
+	      "tr",
+	      null,
+	      React.createElement(
+	        "td",
+	        null,
+	        this.props.book.name,
+	        " ",
+	        React.createElement(
+	          "span",
+	          { className: "pull-right", style: spanStyles },
+	          React.createElement(
+	            "a",
+	            { href: "#", onClick: this.edit },
+	            "edit"
+	          ),
+	          " | ",
+	          React.createElement(
+	            "a",
+	            { href: "#", onClick: this.destroy },
+	            "delete"
 	          )
 	        )
 	      )
 	    );
 	  },
 
-	  choose: function choose() {
-	    var games = this.props.games.filter(function (element) {
-	      return element.expansion === "Base";
-	    });
+	  edit: function edit(event) {
+	    event.preventDefault();
 
-	    var key = Math.floor(Math.random() * games.length);
+	    this.props.onEdit();
+	  },
 
-	    this.setState({
-	      selectedGame: games[key]
-	    });
+	  destroy: function destroy(event) {
+	    event.preventDefault();
+
+	    this.props.onDestroy();
 	  }
 	});
 
 /***/ },
-/* 3 */
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	var _require = __webpack_require__(4);
+	var _require = __webpack_require__(2);
+
+	var Input = _require.Input;
+
+	module.exports = React.createClass({
+	  displayName: "EditBookForm",
+
+	  getInitialState: function getInitialState() {
+	    return {
+	      id: this.props.book.id,
+	      name: this.props.book.name
+	    };
+	  },
+
+	  render: function render() {
+	    return React.createElement(
+	      "tr",
+	      null,
+	      React.createElement(
+	        "td",
+	        null,
+	        React.createElement(Input, { type: "text", ref: "bookName", value: this.state.name, onChange: this.onNameChange }),
+	        React.createElement(
+	          "span",
+	          { className: "pull-right" },
+	          React.createElement(
+	            "a",
+	            { href: "#", onClick: this.update },
+	            "save"
+	          )
+	        )
+	      )
+	    );
+	  },
+
+	  onNameChange: function onNameChange(event) {
+	    this.setState({ name: event.target.value });
+	  },
+
+	  update: function update(event) {
+	    event.preventDefault();
+
+	    this.props.onUpdate(this.state);
+	  }
+	});
+
+/***/ },
+/* 6 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var _require = __webpack_require__(2);
 
 	var Grid = _require.Grid;
 	var Row = _require.Row;
@@ -530,15 +597,11 @@
 	var Button = _require.Button;
 
 	module.exports = React.createClass({
-	  displayName: "NewGameForm",
+	  displayName: "NewBookForm",
 
 	  getInitialState: function getInitialState() {
 	    return {
-	      coop: "",
-	      link: "",
-	      name: "",
-	      players: "",
-	      expansion: ""
+	      name: ""
 	    };
 	  },
 
@@ -559,56 +622,14 @@
 	          { onSubmit: this.submit },
 	          React.createElement(
 	            Input,
-	            { label: "New Game", wrapperClassName: "wrapper" },
+	            { label: "New Book", wrapperClassName: "wrapper" },
 	            React.createElement(
 	              Row,
 	              null,
 	              React.createElement(
 	                Col,
-	                { xs: 3 },
-	                React.createElement(Input, { type: "text", ref: "gameName", placeholder: "Enter game", onChange: this.onNameChange, value: this.state.name })
-	              ),
-	              React.createElement(
-	                Col,
-	                { xs: 3 },
-	                React.createElement(Input, { type: "text", ref: "gamePLayers", placeholder: "Enter no. players", onChange: this.onPlayersChange, value: this.state.players })
-	              ),
-	              React.createElement(
-	                Col,
-	                { xs: 3 },
-	                React.createElement(Input, { type: "text", ref: "gameCoop", placeholder: "Enter co-op", onChange: this.onCoopChange, value: this.state.coop })
-	              ),
-	              React.createElement(
-	                Col,
-	                { xs: 3 },
-	                React.createElement(
-	                  Input,
-	                  { type: "select", ref: "gameExpansion", onChange: this.onExpansionChange, value: this.state.expansion },
-	                  React.createElement(
-	                    "option",
-	                    null,
-	                    "Type"
-	                  ),
-	                  React.createElement(
-	                    "option",
-	                    { value: "Base" },
-	                    "Base"
-	                  ),
-	                  React.createElement(
-	                    "option",
-	                    { value: "Expansion" },
-	                    "Expansion"
-	                  )
-	                )
-	              )
-	            ),
-	            React.createElement(
-	              Row,
-	              null,
-	              React.createElement(
-	                Col,
-	                { xs: 6, xsPush: 3 },
-	                React.createElement(Input, { type: "text", ref: "gameLink", placeholder: "Enter link", onChange: this.onLinkChange, value: this.state.link })
+	                { xs: 12 },
+	                React.createElement(Input, { type: "text", ref: "bookName", placeholder: "Enter book", onChange: this.onNameChange, value: this.state.name })
 	              )
 	            )
 	          ),
@@ -638,255 +659,6 @@
 
 	  onNameChange: function onNameChange(event) {
 	    this.setState({ name: event.target.value });
-	  },
-
-	  onPlayersChange: function onPlayersChange(event) {
-	    this.setState({ players: event.target.value });
-	  },
-
-	  onCoopChange: function onCoopChange(event) {
-	    this.setState({ coop: event.target.value });
-	  },
-
-	  onExpansionChange: function onExpansionChange(event) {
-	    this.setState({ expansion: event.target.value });
-	  },
-
-	  onLinkChange: function onLinkChange(event) {
-	    this.setState({ link: event.target.value });
-	  }
-	});
-
-/***/ },
-/* 4 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = ReactBootstrap;
-
-/***/ },
-/* 5 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	module.exports = React.createClass({
-	  displayName: "GameItem",
-
-	  render: function render() {
-	    var spanStyles = {
-	      display: this.props.user ? "" : "none"
-	    };
-
-	    return React.createElement(
-	      "tr",
-	      null,
-	      React.createElement(
-	        "td",
-	        null,
-	        React.createElement(
-	          "a",
-	          { href: this.props.game.link, target: "_blank" },
-	          this.props.game.name
-	        ),
-	        " ",
-	        React.createElement(
-	          "span",
-	          { className: "pull-right", style: spanStyles },
-	          React.createElement(
-	            "a",
-	            { href: "#", onClick: this.edit },
-	            "edit"
-	          ),
-	          " | ",
-	          React.createElement(
-	            "a",
-	            { href: "#", onClick: this.destroy },
-	            "delete"
-	          )
-	        )
-	      ),
-	      React.createElement(
-	        "td",
-	        null,
-	        this.props.game.players
-	      ),
-	      React.createElement(
-	        "td",
-	        null,
-	        this.props.game.coop
-	      ),
-	      React.createElement(
-	        "td",
-	        null,
-	        this.props.game.expansion
-	      )
-	    );
-	  },
-
-	  edit: function edit(event) {
-	    event.preventDefault();
-
-	    this.props.onEdit();
-	  },
-
-	  destroy: function destroy(event) {
-	    event.preventDefault();
-
-	    this.props.onDestroy();
-	  }
-	});
-
-/***/ },
-/* 6 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	var _require = __webpack_require__(4);
-
-	var Input = _require.Input;
-
-	module.exports = React.createClass({
-	  displayName: "EditGameForm",
-
-	  getInitialState: function getInitialState() {
-	    return {
-	      id: this.props.game.id,
-	      coop: this.props.game.coop,
-	      link: this.props.game.link,
-	      name: this.props.game.name,
-	      players: this.props.game.players,
-	      expansion: this.props.game.expansion
-	    };
-	  },
-
-	  render: function render() {
-	    return React.createElement(
-	      "tr",
-	      null,
-	      React.createElement(
-	        "td",
-	        null,
-	        React.createElement(Input, { type: "text", ref: "gameName", value: this.state.name, onChange: this.onNameChange })
-	      ),
-	      React.createElement(
-	        "td",
-	        null,
-	        React.createElement(Input, { type: "text", ref: "gamePlayers", value: this.state.players, onChange: this.onPlayersChange })
-	      ),
-	      React.createElement(
-	        "td",
-	        null,
-	        React.createElement(Input, { type: "text", ref: "gameCoop", value: this.state.coop, onChange: this.onCoopChange })
-	      ),
-	      React.createElement(
-	        "td",
-	        null,
-	        React.createElement(
-	          Input,
-	          { type: "select", ref: "gameExpansion", value: this.state.expansion, onChange: this.onExpansionChange },
-	          React.createElement(
-	            "option",
-	            null,
-	            "Type"
-	          ),
-	          React.createElement(
-	            "option",
-	            { value: "Base" },
-	            "Base"
-	          ),
-	          React.createElement(
-	            "option",
-	            { value: "Expansion" },
-	            "Expansion"
-	          )
-	        ),
-	        React.createElement(
-	          "span",
-	          { className: "pull-right" },
-	          React.createElement(
-	            "a",
-	            { href: "#", onClick: this.update },
-	            "save"
-	          )
-	        )
-	      )
-	    );
-	  },
-
-	  onNameChange: function onNameChange(event) {
-	    this.setState({ name: event.target.value });
-	  },
-
-	  onPlayersChange: function onPlayersChange(event) {
-	    this.setState({ players: event.target.value });
-	  },
-
-	  onCoopChange: function onCoopChange(event) {
-	    this.setState({ coop: event.target.value });
-	  },
-
-	  onExpansionChange: function onExpansionChange(event) {
-	    this.setState({ expansion: event.target.value });
-	  },
-
-	  onLinkChange: function onLinkChange(event) {
-	    this.setState({ link: event.target.value });
-	  },
-
-	  update: function update(event) {
-	    event.preventDefault();
-
-	    this.props.onUpdate(this.state);
-	  }
-	});
-
-/***/ },
-/* 7 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _require = __webpack_require__(4);
-
-	var Modal = _require.Modal;
-	var Button = _require.Button;
-
-	module.exports = React.createClass({
-	  displayName: "SelectedGameModal",
-
-	  render: function render() {
-	    return React.createElement(
-	      Modal,
-	      _extends({}, this.props, { title: "Play This One" }),
-	      React.createElement(
-	        "div",
-	        { className: "modal-body" },
-	        React.createElement(
-	          "h4",
-	          null,
-	          this.props.game.name
-	        ),
-	        React.createElement(
-	          "p",
-	          null,
-	          "A game for ",
-	          this.props.game.players,
-	          " players."
-	        )
-	      ),
-	      React.createElement(
-	        "div",
-	        { className: "modal-footer" },
-	        React.createElement(
-	          Button,
-	          { onClick: this.props.onRequestHide },
-	          "Close"
-	        )
-	      )
-	    );
 	  }
 	});
 
