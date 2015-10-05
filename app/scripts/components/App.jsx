@@ -117,8 +117,9 @@ var App = React.createClass({
 
   submit(book) {
     this.state.ref.push({
-      id:   Date.now(),
-      name: book.name,
+      id:     Date.now(),
+      name:   book.name,
+      author: book.author
     });
   },
 
