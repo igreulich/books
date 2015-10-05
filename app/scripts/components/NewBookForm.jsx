@@ -47,11 +47,7 @@ module.exports = React.createClass({
     this.props.onSubmit(this.state);
 
     this.setState({
-      coop:      '',
-      link:      '',
-      name:      '',
-      players:   '',
-      expansion: ''
+      name:      ''
     });
   },
 

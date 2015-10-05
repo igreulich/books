@@ -50,8 +50,8 @@
 	var BookList = __webpack_require__(3);
 	var NewBookForm = __webpack_require__(6);
 
-	var BookApp = React.createClass({
-	  displayName: "BookApp",
+	var App = React.createClass({
+	  displayName: "App",
 
 	  mixins: [ReactFireMixin],
 
@@ -168,12 +168,7 @@
 	  submit: function submit(book) {
 	    this.state.ref.push({
 	      id: Date.now(),
-	      name: book.name,
-	      coop: book.coop,
-	      link: book.link,
-	      players: book.players,
-	      expansion: book.expansion
-	    });
+	      name: book.name });
 	  },
 
 	  asecSort: function asecSort() {
@@ -649,11 +644,7 @@
 	    this.props.onSubmit(this.state);
 
 	    this.setState({
-	      coop: "",
-	      link: "",
-	      name: "",
-	      players: "",
-	      expansion: ""
+	      name: ""
 	    });
 	  },
 

@@ -4,7 +4,7 @@ var Nav          = require('./Nav')
 var BookList     = require('./BookList');
 var NewBookForm  = require('./NewBookForm');
 
-var BookApp = React.createClass({
+var App = React.createClass({
   mixins: [ReactFireMixin],
 
   getInitialState() {
@@ -117,12 +117,8 @@ var BookApp = React.createClass({
 
   submit(book) {
     this.state.ref.push({
-      id:        Date.now(),
-      name:      book.name,
-      coop:      book.coop,
-      link:      book.link,
-      players:   book.players,
-      expansion: book.expansion
+      id:   Date.now(),
+      name: book.name,
     });
   },
 
@@ -169,7 +165,7 @@ var BookApp = React.createClass({
   },
 
   _updateItems(books) {
-    var ref   = this.state.ref;
+    var ref = this.state.ref;
 
     ref.set(books);
 
