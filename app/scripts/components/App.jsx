@@ -80,7 +80,7 @@ var App = React.createClass({
   edit(book) {
     var books = this.state.books;
 
-    var editIndex = book.indexOf(book);
+    var editIndex = books.indexOf(book);
 
     books[editIndex].isEditing = true;
 
@@ -88,7 +88,7 @@ var App = React.createClass({
   },
 
   update(book) {
-    var books = this.state.book;
+    var books = this.state.books;
 
     var originalBook = books.filter(element => {
       return element.id === book.id;

@@ -18,10 +18,10 @@ module.exports = React.createClass({
       <tr>
         <td>
           <Input type='text' ref="bookName" value={this.state.name} onChange={this.onNameChange} />
+          <span className="pull-right"><a href="#" onClick={this.update}>save</a></span>
         </td>
         <td>
           <Input type='text' ref="bookAuthor" value={this.state.author} onChange={this.onAuthorChange} />
-          <span className="pull-right"><a href="#" onClick={this.update}>save</a></span>
         </td>
       </tr>
     );

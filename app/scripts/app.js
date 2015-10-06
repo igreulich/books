@@ -130,7 +130,7 @@
 	  edit: function edit(book) {
 	    var books = this.state.books;
 
-	    var editIndex = book.indexOf(book);
+	    var editIndex = books.indexOf(book);
 
 	    books[editIndex].isEditing = true;
 
@@ -138,7 +138,7 @@
 	  },
 
 	  update: function update(book) {
-	    var books = this.state.book;
+	    var books = this.state.books;
 
 	    var originalBook = books.filter(function (element) {
 	      return element.id === book.id;
@@ -565,12 +565,7 @@
 	      React.createElement(
 	        "td",
 	        null,
-	        React.createElement(Input, { type: "text", ref: "bookName", value: this.state.name, onChange: this.onNameChange })
-	      ),
-	      React.createElement(
-	        "td",
-	        null,
-	        React.createElement(Input, { type: "text", ref: "bookAuthor", value: this.state.author, onChange: this.onAuthorChange }),
+	        React.createElement(Input, { type: "text", ref: "bookName", value: this.state.name, onChange: this.onNameChange }),
 	        React.createElement(
 	          "span",
 	          { className: "pull-right" },
@@ -580,6 +575,11 @@
 	            "save"
 	          )
 	        )
+	      ),
+	      React.createElement(
+	        "td",
+	        null,
+	        React.createElement(Input, { type: "text", ref: "bookAuthor", value: this.state.author, onChange: this.onAuthorChange })
 	      )
 	    );
 	  },
