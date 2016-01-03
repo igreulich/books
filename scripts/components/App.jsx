@@ -1,10 +1,12 @@
-'use strict';
+import React      from 'react';
+import { render } from 'react-dom';
+import ReactFireMixin from 'reactfire';
 
-var Nav          = require('./Nav')
-var BookList     = require('./BookList');
-var NewBookForm  = require('./NewBookForm');
+import Nav         from './Nav';
+import BookList    from './BookList';
+import NewBookForm from './NewBookForm';
 
-var App = React.createClass({
+const App = React.createClass({
   mixins: [ReactFireMixin],
 
   getInitialState() {
@@ -80,7 +82,7 @@ var App = React.createClass({
   edit(book) {
     var books = this.state.books;
 
-    var editIndex = book.indexOf(book);
+    var editIndex = books.indexOf(book);
 
     books[editIndex].isEditing = true;
 
@@ -88,7 +90,7 @@ var App = React.createClass({
   },
 
   update(book) {
-    var books = this.state.book;
+    var books = this.state.books;
 
     var originalBook = books.filter(element => {
       return element.id === book.id;
@@ -176,4 +178,4 @@ var App = React.createClass({
   }
 });
 
-React.render(<App />, document.getElementById('app'));
+render(<App />, document.getElementById('app'));
