@@ -1,12 +1,8 @@
-'use strict'
+import React from 'react';
 
-const {
-  Grid,
-  Row,
-  Col
-} = require('react-bootstrap');
+import { Grid, Row, Col } from 'react-bootstrap';
 
-module.exports = React.createClass({
+export default React.createClass({
   displayName: 'Nav',
 
   render() {

@@ -1,8 +1,7 @@
-'use strict'
+import React     from 'react';
+import { Input } from 'react-bootstrap';
 
-const{ Input } = require('react-bootstrap');
-
-module.exports = React.createClass({
+export default React.createClass({
   displayName: 'EditBookForm',
 
   getInitialState() {

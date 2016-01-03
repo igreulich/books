@@ -1,13 +1,10 @@
-'use strict';
+import React  from 'react';
 
-var BookItem      = require('./BookItem');
-var EditItem      = require('./EditItemForm');
-const {
-  Grid,
-  Row
-} = require('react-bootstrap');
+import BookItem      from './BookItem';
+import EditItem      from './EditItemForm';
+import { Grid, Row } from 'react-bootstrap';
 
-module.exports = React.createClass({
+export default React.createClass({
   displayName: 'BookList',
 
   getInitialState() {

@@ -1,10 +1,12 @@
-'use strict';
+import React      from 'react';
+import { render } from 'react-dom';
+import ReactFireMixin from 'reactfire';
 
-var Nav          = require('./Nav')
-var BookList     = require('./BookList');
-var NewBookForm  = require('./NewBookForm');
+import Nav         from './Nav';
+import BookList    from './BookList';
+import NewBookForm from './NewBookForm';
 
-var App = React.createClass({
+const App = React.createClass({
   mixins: [ReactFireMixin],
 
   getInitialState() {
@@ -176,4 +178,4 @@ var App = React.createClass({
   }
 });
 
-React.render(<App />, document.getElementById('app'));
+render(<App />, document.getElementById('app'));

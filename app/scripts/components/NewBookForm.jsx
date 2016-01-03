@@ -1,14 +1,8 @@
-'use strict';
+import React  from 'react';
 
-const {
-  Grid,
-  Row,
-  Col,
-  Input,
-  Button
-} = require('react-bootstrap');
+import { Grid, Row, Col, Input, Button } from 'react-bootstrap';
 
-module.exports = React.createClass({
+export default React.createClass({
   displayName: 'NewBookForm',
 
   getInitialState() {
