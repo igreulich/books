@@ -30,14 +30,14 @@ export default React.createClass({
             <Col md={6} className="nav-wrapper">
               <nav className="navbar navbar-inverse navbar-static-top" role="navigation">
                 <div className="navbar-header">
-                  <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                  <button type="button" className="navbar-toggle collapsed" onTouchStart={this.toggeNav} onClick={this.toggleNav}>
                     <span className="sr-only">Toggle navigation</span>
                     <span className="icon-bar"></span>
                     <span className="icon-bar"></span>
                     <span className="icon-bar"></span>
                   </button>
                 </div>
-                <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <div className="collapse navbar-collapse" id="mobile-nav">
                   <ul className="nav navbar-nav">
                     <li style={liStyles}><a href="#">Profile</a></li>
                     {authLink}
@@ -68,5 +68,11 @@ export default React.createClass({
     var query = this.refs.search.getDOMNode().value;
 
     this.props.onSearch(query);
+  },
+
+  toggleNav() {
+    const $el = document.getElementById('mobile-nav');
+
+    $el.classList.toggle('in');
   }
 });
