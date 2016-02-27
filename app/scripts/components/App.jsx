@@ -1,5 +1,5 @@
-import React      from 'react';
-import { render } from 'react-dom';
+import React          from 'react';
+import { render }     from 'react-dom';
 import ReactFireMixin from 'reactfire';
 
 import Nav         from './Nav';

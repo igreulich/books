@@ -14,11 +14,11 @@ export default React.createClass({
   },
 
   render() {
-    var bookAction = book => {
+    var bookAction = (book, index) => {
       if (book.isEditing) {
-        return <EditItem key={book.id} book={book} onUpdate={this.props.onUpdate} />;
+        return <EditItem key={index} book={book} onUpdate={this.props.onUpdate} />;
       } else {
-        return <BookItem key={book.id} book={book} user={this.props.user} onEdit={() => this.props.onEdit(book)} onDestroy={() => this.props.onDestroy(book)} />;
+        return <BookItem key={index} book={book} user={this.props.user} onEdit={() => this.props.onEdit(book)} onDestroy={() => this.props.onDestroy(book)} />;
       }
     };
 
