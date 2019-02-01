@@ -8,8 +8,6 @@ import {
 } from 'semantic-ui-react';
 
 const Head = (props) => {
-  console.log(props);
-
   return (
     <Menu fixed="top" inverted>
       <Container>

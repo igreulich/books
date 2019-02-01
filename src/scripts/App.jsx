@@ -29,20 +29,20 @@ class App extends Component {
 
     return (
       <>
-        <Sidebar.Pushable as={Segment}>
+        <Head handleOpen={this.handleShowClick} />
+        <Sidebar.Pushable as={Segment} className="app-container">
           <Sidebar
             as={Menu}
             animation='overlay'
             icon='labeled'
-            inverted
             onHide={this.handleSidebarHide}
             vertical
             visible={visible}
             width='thin'
           >
             <Menu.Item as='a'>
-              <Icon name='home' />
-              Home
+              <Icon name='book' />
+              Collection
             </Menu.Item>
             <Menu.Item as='a'>
               <Icon name='gamepad' />
@@ -55,13 +55,10 @@ class App extends Component {
           </Sidebar>
 
           <Sidebar.Pusher>
-            <Segment basic>
-              <Head handleOpen={this.handleShowClick} />
-              <Body />
-              <Foot />
-            </Segment>
+            <Body />
           </Sidebar.Pusher>
         </Sidebar.Pushable>
+        <Foot />
       </>
     );
   }
