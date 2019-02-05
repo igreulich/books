@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import { hot } from 'react-hot-loader';
 
-import Head from './components/Head';
-import Body from './components/Body';
-import Foot from './components/Foot';
-
 import {
   Icon,
   Menu,
   Segment,
   Sidebar,
 } from 'semantic-ui-react';
+
+import Head from './components/Head';
+import Body from './components/Body';
+import Foot from './components/Foot';
 
 import '@babel/polyfill';
 import 'airbnb-browser-shims';
@@ -45,12 +45,12 @@ class App extends Component {
               Collection
             </Menu.Item>
             <Menu.Item as='a'>
-              <Icon name='gamepad' />
-              Games
+              <Icon name='user' />
+              Authors
             </Menu.Item>
             <Menu.Item as='a'>
-              <Icon name='camera' />
-              Channels
+              <Icon name='ordered list' />
+              Series
             </Menu.Item>
           </Sidebar>
 
