@@ -3,6 +3,7 @@ import React from 'react';
 import {
   Container,
   Dropdown,
+  Icon,
   Image,
   Menu,
 } from 'semantic-ui-react';
@@ -12,8 +13,8 @@ const Head = (props) => {
     <Menu fixed="top" inverted>
       <Container>
         <Menu.Item as="a" header>
-          <Image size="mini" src="/logo.png" style={{ marginRight: '1.5em' }} />
-          Project Name
+          <Icon name="tv" sixe="large" style={{ marginRight: '1.5em' }} />
+          Greulich Online
         </Menu.Item>
         <Menu.Item as="a">Home</Menu.Item>
 
