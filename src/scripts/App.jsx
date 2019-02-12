@@ -9,8 +9,9 @@ import {
 } from 'semantic-ui-react';
 
 import Head from './components/Head';
-import Body from './components/Body';
 import Foot from './components/Foot';
+
+import BodyContainer from './containers/BodyContainer';
 
 import '@babel/polyfill';
 import 'airbnb-browser-shims';
@@ -55,7 +56,7 @@ class App extends Component {
           </Sidebar>
 
           <Sidebar.Pusher>
-            <Body />
+            <BodyContainer />
           </Sidebar.Pusher>
         </Sidebar.Pushable>
         <Foot />
