@@ -7,20 +7,27 @@ import {
   Table,
 } from 'semantic-ui-react';
 
+import Book from './Book';
+
 export default class Books extends Component {
   static propTypes = {
-    fetchBooks: PropTypes.func,
+    books: PropTypes.arrayOf(PropTypes.object).isRequired,
+    fetchBooks: PropTypes.func.isRequired,
   };
 
-  static defaultProps = {
-    fetchBooks: () => {},
-  };
+  static defaultProps = {};
 
   componentDidMount() {
     const { fetchBooks } = this.props;
 
     fetchBooks();
   }
+
+  renderBooks = () => {
+    const { books } = this.props;
+
+    return books.map(book => <Book book={book} />);
+  };
 
   render() {
     return (
@@ -37,66 +44,7 @@ export default class Books extends Component {
           </Table.Header>
 
           <Table.Body>
-            <Table.Row>
-              <Table.Cell>The Phantom Menace</Table.Cell>
-              <Table.Cell>George Lucas</Table.Cell>
-              <Table.Cell>Star Wars</Table.Cell>
-              <Table.Cell>1</Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell>Attack of the Clones</Table.Cell>
-              <Table.Cell>George Lucas</Table.Cell>
-              <Table.Cell>Star Wars</Table.Cell>
-              <Table.Cell>2</Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell>Revenge of the Sith</Table.Cell>
-              <Table.Cell>George Lucas</Table.Cell>
-              <Table.Cell>Star Wars</Table.Cell>
-              <Table.Cell>3</Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell>A New Hope</Table.Cell>
-              <Table.Cell>George Lucas</Table.Cell>
-              <Table.Cell>Star Wars</Table.Cell>
-              <Table.Cell>4</Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell>Empire Strikes Back</Table.Cell>
-              <Table.Cell>George Lucas</Table.Cell>
-              <Table.Cell>Star Wars</Table.Cell>
-              <Table.Cell>5</Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell>Return of the Jedi</Table.Cell>
-              <Table.Cell>George Lucas</Table.Cell>
-              <Table.Cell>Star Wars</Table.Cell>
-              <Table.Cell>6</Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell>The Force Awakens</Table.Cell>
-              <Table.Cell>George Lucas</Table.Cell>
-              <Table.Cell>Star Wars</Table.Cell>
-              <Table.Cell>7</Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell>The Last Jedi</Table.Cell>
-              <Table.Cell>George Lucas</Table.Cell>
-              <Table.Cell>Star Wars</Table.Cell>
-              <Table.Cell>8</Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell>Episode IX</Table.Cell>
-              <Table.Cell>George Lucas</Table.Cell>
-              <Table.Cell>Star Wars</Table.Cell>
-              <Table.Cell>9</Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell>The Hobbit</Table.Cell>
-              <Table.Cell>J.R.R. Tolkien</Table.Cell>
-              <Table.Cell></Table.Cell>
-              <Table.Cell></Table.Cell>
-            </Table.Row>
+            {this.renderBooks()}
           </Table.Body>
         </Table>
       </Container>

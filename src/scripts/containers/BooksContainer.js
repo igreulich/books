@@ -5,7 +5,7 @@ import { fetchBooks } from '../reducers/books';
 import Books from '../components/Books';
 
 const mapStateToProps = state => ({
-  users: state.users,
+  books: state.books.books,
 });
 
 const mapDispatchToProps = dispatch => ({
