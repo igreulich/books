@@ -16,14 +16,12 @@ export const reducer = handleActions(
   initialState,
 );
 
-export const fetchBooks = () => {
-  return dispatch => {
-    fetch('https://jsonplaceholder.typicode.com/users')
-      .then(handleErrors)
-      .then(res => res.json())
-      .then(json => dispatch(updateBooks(json)));
-  }
-}
+export const fetchBooks = () => (dispatch) => {
+  fetch('https://my-json-server.typicode.com/igreulich/mock/books')
+    .then(handleErrors) // eslint-disable-line no-use-before-define
+    .then(res => res.json())
+    .then(json => dispatch(updateBooks(json)));
+};
 
 // Apparently fetch doesn't handle errors?
 function handleErrors(res) {

@@ -4,11 +4,11 @@ import { fetchBooks } from '../reducers/books';
 
 import Body from '../components/Body';
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   users: state.users,
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   fetchBooks: () => dispatch(fetchBooks()),
 });
 

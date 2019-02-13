@@ -50,7 +50,7 @@
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
     "airbnb-browser-shims": "^3.0.0",
-    "prop-types": "^15.6.2",
+    "prop-types": "^15.7.1",
     "react": "^16.6.1",
     "react-dom": "^16.6.1",
     "react-hot-loader": "^4.3.12",

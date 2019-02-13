@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import {
   Container,
@@ -7,15 +8,25 @@ import {
 } from 'semantic-ui-react';
 
 export default class Body extends Component {
+  static propTypes = {
+    fetchBooks: PropTypes.func,
+  };
+
+  static defaultProps = {
+    fetchBooks: () => {},
+  };
+
   componentDidMount() {
-    this.props.fetchBooks();
+    const { fetchBooks } = this.props;
+
+    fetchBooks();
   }
 
   render() {
     return (
       <Container text>
         <Header as="h1">The Grey Library</Header>
-        <Table color='green'>
+        <Table color="green">
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell>Title</Table.HeaderCell>

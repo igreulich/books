@@ -8,10 +8,10 @@ import {
   Sidebar,
 } from 'semantic-ui-react';
 
+import BodyContainer from './containers/BodyContainer';
+
 import Head from './components/Head';
 import Foot from './components/Foot';
-
-import BodyContainer from './containers/BodyContainer';
 
 import '@babel/polyfill';
 import 'airbnb-browser-shims';
@@ -21,9 +21,7 @@ import '../styles/app.less';
 class App extends Component {
   state = { visible: false }
 
-  handleHideClick = () => this.setState({ visible: false })
-  handleShowClick = () => this.setState({ visible: true })
-  handleSidebarHide = () => this.setState({ visible: false })
+  handleHideClick = () => this.setState({ visible: false });
 
   render() {
     const { visible } = this.state;
@@ -34,23 +32,23 @@ class App extends Component {
         <Sidebar.Pushable as={Segment} className="app-container">
           <Sidebar
             as={Menu}
-            animation='overlay'
-            icon='labeled'
+            animation="overlay"
+            icon="labeled"
             onHide={this.handleSidebarHide}
             vertical
             visible={visible}
-            width='thin'
+            width="thin"
           >
-            <Menu.Item as='a'>
-              <Icon name='book' />
+            <Menu.Item as="a">
+              <Icon name="book" />
               Collection
             </Menu.Item>
-            <Menu.Item as='a'>
-              <Icon name='user' />
+            <Menu.Item as="a">
+              <Icon name="user" />
               Authors
             </Menu.Item>
-            <Menu.Item as='a'>
-              <Icon name='ordered list' />
+            <Menu.Item as="a">
+              <Icon name="ordered list" />
               Series
             </Menu.Item>
           </Sidebar>

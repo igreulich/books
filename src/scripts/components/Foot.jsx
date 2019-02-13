@@ -7,7 +7,6 @@ import {
   Header,
   Image,
   List,
-  Menu,
   Segment,
 } from 'semantic-ui-react';
 
