@@ -8,7 +8,7 @@ import {
   Sidebar,
 } from 'semantic-ui-react';
 
-import BodyContainer from './containers/BodyContainer';
+import BooksContainer from './containers/BooksContainer';
 
 import Head from './components/Head';
 import Foot from './components/Foot';
@@ -54,7 +54,7 @@ class App extends Component {
           </Sidebar>
 
           <Sidebar.Pusher>
-            <BodyContainer />
+            <BooksContainer />
           </Sidebar.Pusher>
         </Sidebar.Pushable>
         <Foot />

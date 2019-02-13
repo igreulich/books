@@ -7,7 +7,7 @@ import {
   Table,
 } from 'semantic-ui-react';
 
-export default class Body extends Component {
+export default class Books extends Component {
   static propTypes = {
     fetchBooks: PropTypes.func,
   };
