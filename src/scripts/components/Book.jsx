@@ -2,15 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Table } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 
 const Book = (props) => {
-  console.log(props);
-
   const { book } = props;
 
   return (
     <Table.Row>
-      <Table.Cell>{book.title}</Table.Cell>
+      <Table.Cell><Link to={`/book/${book.id}`}>{book.title}</Link></Table.Cell>
       <Table.Cell>{book.author}</Table.Cell>
       <Table.Cell>{!!book.series && book.series}</Table.Cell>
       <Table.Cell>{!!book.number && book.number}</Table.Cell>

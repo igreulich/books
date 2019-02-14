@@ -26,7 +26,7 @@ export default class Books extends Component {
   renderBooks = () => {
     const { books } = this.props;
 
-    return books.map(book => <Book book={book} />);
+    return books.map(book => <Book key={book.id} book={book} />);
   };
 
   render() {

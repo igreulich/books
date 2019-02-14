@@ -7,8 +7,10 @@ import {
   Segment,
   Sidebar,
 } from 'semantic-ui-react';
+import { Route } from 'react-router-dom';
 
 import BooksContainer from './containers/BooksContainer';
+import BookDetail from './components/BookDetail';
 
 import Head from './components/Head';
 import Foot from './components/Foot';
@@ -54,7 +56,8 @@ class App extends Component {
           </Sidebar>
 
           <Sidebar.Pusher>
-            <BooksContainer />
+            <Route path="/books" component={BooksContainer} />
+            <Route path="/book/:id" component={BookDetail} />
           </Sidebar.Pusher>
         </Sidebar.Pushable>
         <Foot />

@@ -6,6 +6,7 @@ import {
   Icon,
   Menu,
 } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 
 const Head = () => (
   <Menu fixed="top" inverted>
@@ -14,7 +15,7 @@ const Head = () => (
         <Icon name="tv" sixe="large" style={{ marginRight: '1.5em' }} />
         Greulich Online
       </Menu.Item>
-      <Menu.Item as="a">Home</Menu.Item>
+      <Menu.Item as={Link} to="/books">Collection</Menu.Item>
 
       <Dropdown item simple text="Dropdown">
         <Dropdown.Menu>
