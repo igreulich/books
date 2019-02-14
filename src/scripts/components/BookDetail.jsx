@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import {
   Container,
@@ -10,27 +10,31 @@ import {
 
 const paragraph = <Image src="https://react.semantic-ui.com/images/wireframe/short-paragraph.png" />;
 
-const BookDetail = (props) => {
-  console.log('props', props);
+export default class BookDetail extends Component {
+  componentDidMount() {
+    const { setBookId, match } = this.props;
 
-  return (
-    <Item.Group as={Container} text>
-      <Item>
-        <Item.Image src="https://react.semantic-ui.com/images/wireframe/image.png" />
-        <Item.Content>
-          <Item.Header as="a">12 Years a Slave</Item.Header>
-          <Item.Meta>
-            <span className="cinema">Union Square 14</span>
-          </Item.Meta>
-          <Item.Description>{paragraph}</Item.Description>
-          <Item.Extra>
-            <Label>IMAX</Label>
-            <Label icon="globe" content="Additional Languages" />
-          </Item.Extra>
-        </Item.Content>
-      </Item>
-    </Item.Group>
-  );
-};
+    setBookId(match.params.id);
+  }
 
-export default BookDetail;
+  render() {
+    return (
+      <Item.Group as={Container} text>
+        <Item>
+          <Item.Image src="https://react.semantic-ui.com/images/wireframe/image.png" />
+          <Item.Content>
+            <Item.Header as="a">12 Years a Slave</Item.Header>
+            <Item.Meta>
+              <span className="cinema">Union Square 14</span>
+            </Item.Meta>
+            <Item.Description>{paragraph}</Item.Description>
+            <Item.Extra>
+              <Label>IMAX</Label>
+              <Label icon="globe" content="Additional Languages" />
+            </Item.Extra>
+          </Item.Content>
+        </Item>
+      </Item.Group>
+    );
+  }
+}

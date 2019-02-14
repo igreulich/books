@@ -10,7 +10,7 @@ import {
 import { Route } from 'react-router-dom';
 
 import BooksContainer from './containers/BooksContainer';
-import BookDetail from './components/BookDetail';
+import BookDetailContainer from './containers/BookDetailContainer';
 
 import Head from './components/Head';
 import Foot from './components/Foot';
@@ -57,7 +57,7 @@ class App extends Component {
 
           <Sidebar.Pusher>
             <Route path="/books" component={BooksContainer} />
-            <Route path="/book/:id" component={BookDetail} />
+            <Route path="/book/:id" component={BookDetailContainer} />
           </Sidebar.Pusher>
         </Sidebar.Pushable>
         <Foot />

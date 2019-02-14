@@ -2,11 +2,11 @@ import { createAction, handleActions } from 'redux-actions';
 
 export const updateBooks = createAction('UPDATE_BOOKS');
 export const setBooks = createAction('SET_BOOKS');
-export const getBook = createAction('GET_BOOK');
+export const setBookId = createAction('SET_BOOK_ID');
 
 const initialState = {
   books: [],
-  selectedBook: {},
+  bookId: null,
 };
 
 export const reducer = handleActions(
@@ -19,9 +19,9 @@ export const reducer = handleActions(
       ...state,
       books: action.payload,
     }),
-    [getBook]: (state, action) => ({
+    [setBookId]: (state, action) => ({
       ...state,
-      selectedBook: state.books.filter(book => book.id === action.payload),
+      bookId: action.payload,
     }),
   },
   initialState,
