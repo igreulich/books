@@ -1,37 +1,55 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import {
   Container,
   Icon,
-  Image,
   Item,
   Label,
 } from 'semantic-ui-react';
 
-const paragraph = <Image src="https://react.semantic-ui.com/images/wireframe/short-paragraph.png" />;
-
 export default class BookDetail extends Component {
-  componentDidMount() {
-    const { setBookId, match } = this.props;
+  static propTypes = {
+    book: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+    fetchBook: PropTypes.func,
+    match: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  };
 
-    setBookId(match.params.id);
+  static defaultProps = {
+    book: {},
+    fetchBook: () => {},
+  };
+
+  componentDidMount() {
+    const { fetchBook, match } = this.props;
+
+    fetchBook(match.params.id);
+  }
+
+  renderMetadata = () => {
+    const { book } = this.props;
+
+    return (
+      <Item.Extra>
+        <Label color="green" basic>{book.series}</Label>
+        <Label color="green" basic>
+          <Icon name="hashtag" fitted />
+          {book.number}
+        </Label>
+      </Item.Extra>
+    );
   }
 
   render() {
+    const { book } = this.props;
+
     return (
       <Item.Group as={Container} text>
         <Item>
-          <Item.Image src="https://react.semantic-ui.com/images/wireframe/image.png" />
+          <Icon name="book" size="big" color="green" bordered inverted />
           <Item.Content>
-            <Item.Header as="a">12 Years a Slave</Item.Header>
-            <Item.Meta>
-              <span className="cinema">Union Square 14</span>
-            </Item.Meta>
-            <Item.Description>{paragraph}</Item.Description>
-            <Item.Extra>
-              <Label>IMAX</Label>
-              <Label icon="globe" content="Additional Languages" />
-            </Item.Extra>
+            <Item.Header>{book.title}</Item.Header>
+            {(book.series || book.number) && this.renderMetadata()}
           </Item.Content>
         </Item>
       </Item.Group>
