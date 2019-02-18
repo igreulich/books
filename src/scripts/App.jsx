@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { hot } from 'react-hot-loader';
 
 import {
@@ -23,20 +23,24 @@ import '../styles/app.less';
 class App extends Component {
   state = { visible: false }
 
-  handleHideClick = () => this.setState({ visible: false });
+  handleToggleSidebar = () => {
+    this.setState(state => ({ visible: !state.visible }));
+  };
 
   render() {
     const { visible } = this.state;
 
     return (
-      <>
-        <Head handleOpen={this.handleShowClick} />
+      <Fragment>
+        <Head handleToggleSidebar={this.handleToggleSidebar} />
         <Sidebar.Pushable as={Segment} className="app-container">
           <Sidebar
             as={Menu}
-            animation="overlay"
+            animation="uncover"
+            color="green"
+            direction="right"
             icon="labeled"
-            onHide={this.handleSidebarHide}
+            inverted
             vertical
             visible={visible}
             width="thin"
@@ -61,7 +65,7 @@ class App extends Component {
           </Sidebar.Pusher>
         </Sidebar.Pushable>
         <Foot />
-      </>
+      </Fragment>
     );
   }
 }

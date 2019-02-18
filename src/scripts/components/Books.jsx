@@ -31,7 +31,7 @@ export default class Books extends Component {
 
   render() {
     return (
-      <Container text>
+      <Container text className="book-list">
         <Header as="h1">The Grey Library</Header>
         <Table color="green">
           <Table.Header>
