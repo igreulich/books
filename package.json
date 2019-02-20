@@ -4,7 +4,7 @@
   "description": "An app to catalogue books",
   "scripts": {
     "start:client": "webpack-dev-server --config webpack.dev.js",
-    "start:api": "nodemon ./bin/www",
+    "start:api": "nodemon --exec 'node -r dotenv/config' ./bin/www",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -25,6 +25,7 @@
     "babel-preset-airbnb": "^3.0.1",
     "browser-sync": "^2.2.3",
     "css-loader": "^1.0.1",
+    "dotenv": "^6.2.0",
     "eslint": "^5.8.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-prettier": "^3.1.0",
@@ -55,7 +56,9 @@
     "express": "^4.16.4",
     "http-errors": "^1.7.2",
     "jade": "^1.11.0",
+    "knex": "^0.16.3",
     "morgan": "^1.9.1",
+    "mysql": "^2.16.0",
     "prop-types": "^15.7.1",
     "react": "^16.6.1",
     "react-dom": "^16.6.1",
