@@ -1,39 +1,37 @@
-var webpack = require('webpack');
+const webpack = require('webpack');
+const packageJson = require('./package.json');
 
-var externals          = {};
-var externalLibs       = Object.keys(externals);
-var packageJson        = require('./package.json');
-var dependencies       = Object.keys(packageJson.dependencies);
-var vendorDependencies = dependencies.filter(function(dep) {
-  return externalLibs.indexOf(dep) === -1;
-});
+const externals = {};
+const externalLibs = Object.keys(externals);
+const dependencies = Object.keys(packageJson.dependencies);
+const vendorDependencies = dependencies.filter(dep => externalLibs.indexOf(dep) === -1);
 
 module.exports = {
   cache: true,
   entry: {
-    app:    './app/scripts/components/App.jsx',
-    vendor: vendorDependencies
+    app: './app/scripts/components/App.jsx',
+    vendor: vendorDependencies,
   },
   output: {
     path: './app/scripts',
-    filename: '[name].js'
+    filename: '[name].js',
   },
-  externals: externals,
+  externals,
   module: {
     loaders: [
       {
-        test:    /\.jsx$/,
+        test: /\.jsx$/,
         exclude: '/node_modules/',
-        loader:  'babel-loader' 
-      }
-    ]
+        loader: 'babel-loader',
+      },
+    ],
   },
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx'],
   },
   plugins: [
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(true),
-    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.bundle.js')
-  ]
+    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.bundle.js'),
+  ],
 };
