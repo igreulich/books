@@ -7,7 +7,6 @@ import rootReducer from '../reducers/index';
 const configureStore = (preloadedState) => {
   const middlewares = [thunk];
   const composedEnhancers = composeWithDevTools(applyMiddleware(...middlewares));
-
   const store = createStore(rootReducer, preloadedState, composedEnhancers);
 
   return store;
