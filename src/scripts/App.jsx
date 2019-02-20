@@ -7,12 +7,11 @@ import {
   Segment,
   Sidebar,
 } from 'semantic-ui-react';
-import { Route } from 'react-router-dom';
-
-import BooksContainer from './containers/BooksContainer';
-import BookDetailContainer from './containers/BookDetailContainer';
+import { Route, Link } from 'react-router-dom';
 
 import Head from './components/Head';
+import BooksContainer from './containers/BooksContainer';
+import BookDetailContainer from './containers/BookDetailContainer';
 import Foot from './components/Foot';
 
 import '@babel/polyfill';
@@ -45,7 +44,7 @@ class App extends Component {
             visible={visible}
             width="thin"
           >
-            <Menu.Item as="a">
+            <Menu.Item as={Link} to="/books">
               <Icon name="book" />
               Collection
             </Menu.Item>
