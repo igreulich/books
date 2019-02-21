@@ -2,9 +2,15 @@ const express = require('express');
 
 const router = express.Router();
 
-/* GET home page. */
-router.get('/', (req, res, next) => { // eslint-disable-line no-unused-vars
-  res.render('index', { title: 'The Grey Library' });
-});
+const booksController = require('../controllers/books');
+const notFoundController = require('../controllers/not-found');
+
+router.get('/books', booksController.all);
+router.post('/books', booksController.create);
+router.get('/book/:id', booksController.get);
+router.put('/book/:id', booksController.update);
+router.delete('/book/:id', booksController.destroy);
+
+router.get('*', notFoundController.show);
 
 module.exports = router;
