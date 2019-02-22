@@ -1,7 +1,9 @@
+const path = require('path');
+
 // Update with your config settings.
 module.exports = {
   development: {
-    client: 'mysql',
+    client: 'mysql2',
     connection: {
       user: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
@@ -9,6 +11,10 @@ module.exports = {
     },
     migrations: {
       tableName: 'knex_migrations',
+      directory: path.resolve(__dirname, 'src', 'api', 'db', 'migrations'),
+    },
+    seeds: {
+      directory: path.resolve(__dirname, 'src', 'api', 'db', 'seeds'),
     },
   },
   staging: {

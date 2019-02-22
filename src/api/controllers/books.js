@@ -1,23 +1,28 @@
-const connection = require('../../../config.js');
+const { graphql, buildSchema } = require('graphql');
+
+const { booksSchema, booksQuery } = require('../graphql/books')(buildSchema);
+const { bookSchema, bookQuery } = require('../graphql/book')(buildSchema);
+const knex = require('../db/knex');
 
 module.exports = {
   all: (req, res) => {
-    connection.query('SELECT * FROM books',
-      (err, rows) => {
-        if (err) {
-          res
-            .status(400)
-            .send(err);
-        } else {
-          res.setHeader('Content-Type', 'application/json');
-          res
-            .status(200)
-            .send(JSON.stringify({
-              result: 'success',
-              data: rows,
-            }));
-        }
-      });
+    knex.select().from('books').asCallback(async (err, rows) => {
+      if (err) {
+        res
+          .status(400)
+          .send(err);
+      } else {
+        const response = await graphql(booksSchema, booksQuery, { books: rows });
+
+        res.setHeader('Content-Type', 'application/json');
+        res
+          .status(200)
+          .send(JSON.stringify({
+            result: 'success',
+            data: response.data,
+          }));
+      }
+    });
   },
 
   create: (req, res, next) => { // eslint-disable-line no-unused-vars
@@ -35,21 +40,21 @@ module.exports = {
         .status(200)
         .send(JSON.stringify(response));
     } else {
-      connection.query('INSERT INTO books (title) VALUES (?)', [title], (err, result) => {
+      knex('books').insert({ title }).asCallback((err, result) => {
         handleSuccessOrErrorMessage(err, result, res); // eslint-disable-line no-use-before-define
       });
     }
   },
 
-  get: (req, res) => {
-    connection.query('SELECT * from books where id = ?', [req.params.id], (err, rows) => {
+  show: (req, res) => {
+    knex.select().from('books').where({ id: req.params.id }).asCallback(async (err, rows) => {
+      const response = await graphql(bookSchema, bookQuery, { book: rows[0] });
+
       res.setHeader('Content-Type', 'application/json');
-      res
-        .status(200)
-        .send(JSON.stringify({
-          result: 'success',
-          data: rows[0],
-        }));
+      res.status(200).send(JSON.stringify({
+        result: 'success',
+        data: response.data,
+      }));
     });
   },
 
@@ -65,14 +70,14 @@ module.exports = {
       res.setHeader('Content-Type', 'application/json');
       res.send(200, JSON.stringify(response));
     } else {
-      connection.query('UPDATE books SET title = ? WHERE id = ?', [title, id], (err, result) => {
+      knex('books').where({ id }).update({ title }).asCallback((err, result) => {
         handleSuccessOrErrorMessage(err, result, res); // eslint-disable-line no-use-before-define
       });
     }
   },
 
   destroy: (req, res) => {
-    connection.query('DELETE FROM books WHERE id = ?', [req.params.id], (err, result) => {
+    knex('books').where({ id: req.params.id }).del().asCallback((err, result) => {
       handleSuccessOrErrorMessage(err, result, res); // eslint-disable-line no-use-before-define
     });
   },
