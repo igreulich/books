@@ -1,10 +1,19 @@
-const createError = require('http-errors');
-const express = require('express');
 const path = require('path');
+const express = require('express');
+const { ApolloServer } = require('apollo-server-express');
+const createError = require('http-errors');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
-const indexRouter = require('./src/api/routes/index');
+const { typeDefs, resolvers } = require('./src/api/graphql/schema');
+const db = require('./src/api/db/knex');
+const booksRouter = require('./src/api/routes/books');
+
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  context: { db },
+});
 
 const app = express();
 
@@ -18,7 +27,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/api', indexRouter);
+app.use('/api', booksRouter);
+
+server.applyMiddleware({ app });
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

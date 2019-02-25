@@ -2,11 +2,11 @@ const { graphql, buildSchema } = require('graphql');
 
 const { booksSchema, booksQuery } = require('../graphql/books')(buildSchema);
 const { bookSchema, bookQuery } = require('../graphql/book')(buildSchema);
-const knex = require('../db/knex');
+const Book = require('../models/book');
 
 module.exports = {
   all: (req, res) => {
-    knex.select().from('books').asCallback(async (err, rows) => {
+    Book.query().asCallback(async (err, rows) => {
       if (err) {
         res
           .status(400)
@@ -25,7 +25,7 @@ module.exports = {
     });
   },
 
-  create: (req, res, next) => { // eslint-disable-line no-unused-vars
+  create: (req, res) => {
     const { title } = req.body;
     let response;
 
@@ -40,14 +40,14 @@ module.exports = {
         .status(200)
         .send(JSON.stringify(response));
     } else {
-      knex('books').insert({ title }).asCallback((err, result) => {
+      Book.query().insert({ title }).asCallback((err, result) => {
         handleSuccessOrErrorMessage(err, result, res); // eslint-disable-line no-use-before-define
       });
     }
   },
 
   show: (req, res) => {
-    knex.select().from('books').where({ id: req.params.id }).asCallback(async (err, rows) => {
+    Book.query().where({ id: req.params.id }).asCallback(async (err, rows) => {
       const response = await graphql(bookSchema, bookQuery, { book: rows[0] });
 
       res.setHeader('Content-Type', 'application/json');
@@ -70,14 +70,14 @@ module.exports = {
       res.setHeader('Content-Type', 'application/json');
       res.send(200, JSON.stringify(response));
     } else {
-      knex('books').where({ id }).update({ title }).asCallback((err, result) => {
+      Book.query().updateAndFetchById(id, { title }).asCallback((err, result) => {
         handleSuccessOrErrorMessage(err, result, res); // eslint-disable-line no-use-before-define
       });
     }
   },
 
   destroy: (req, res) => {
-    knex('books').where({ id: req.params.id }).del().asCallback((err, result) => {
+    Book.query().where({ id: req.params.id }).delete().asCallback((err, result) => {
       handleSuccessOrErrorMessage(err, result, res); // eslint-disable-line no-use-before-define
     });
   },

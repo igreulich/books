@@ -51,6 +51,7 @@
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
     "airbnb-browser-shims": "^3.0.0",
+    "apollo-server-express": "^2.4.6",
     "cookie-parser": "^1.4.4",
     "debug": "^4.1.1",
     "express": "^4.16.4",
@@ -60,6 +61,8 @@
     "knex": "^0.16.3",
     "morgan": "^1.9.1",
     "mysql2": "^1.6.5",
+    "objection": "^1.6.2",
+    "objection-graphql": "^0.4.4",
     "prop-types": "^15.7.1",
     "react": "^16.6.1",
     "react-dom": "^16.6.1",
