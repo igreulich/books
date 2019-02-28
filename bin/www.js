@@ -11,7 +11,7 @@ const app = require('../app');
 /**
  * Get port from environment and store in Express.
  */
-const port = normalizePort(process.env.PORT || '3000'); // eslint-disable-line no-use-before-define
+const port = normalizePort(process.env.API_PORT || '3000'); // eslint-disable-line no-use-before-define
 app.set('port', port);
 
 /**
