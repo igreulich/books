@@ -23,10 +23,10 @@ export const reducer = handleActions(
 );
 
 export const fetchBooks = () => (dispatch) => {
-  fetch('https://my-json-server.typicode.com/igreulich/mock/books')
+  fetch('//localhost:1138/graphql?query={books{id title series}}')
     .then(handleErrors) // eslint-disable-line no-use-before-define
     .then(res => res.json())
-    .then(json => dispatch(setBooks(json)));
+    .then(json => dispatch(setBooks(json.data.books)));
 };
 
 export const fetchBook = id => (dispatch) => {
