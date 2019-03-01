@@ -17,7 +17,7 @@ const typeDefs = gql`
 
   type Mutation {
     createBook(title: String!, series: String): Book!
-    updateBook(id: ID!, title: String, series: String): Book!
+    updateBook(id: ID!, title: String, series: String, number: Int): Book!
     deleteBook(id: ID!): Int!
   }
 `;
@@ -28,8 +28,8 @@ const resolvers = {
     book: (_, id) => Book.query().where(id).then(res => res[0]),
   },
   Mutation: {
-    updateBook: (_, { id, title, series }) => (
-      Book.query().updateAndFetchById(id, { title, series })
+    updateBook: (_, { id, title, series, number }) => ( // eslint-disable-line object-curly-newline
+      Book.query().updateAndFetchById(id, { title, series, number })
     ),
     createBook: (_, { title, series }) => (
       Book.query().insert({ title, series })

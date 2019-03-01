@@ -8,6 +8,7 @@ const webpack = require('webpack');
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 const devMode = process.env.NODE_ENV !== 'production';
 
@@ -62,6 +63,7 @@ module.exports = {
       template: './src/client/templates/index.html',
       title: "Greulich's Books",
     }),
+    new Dotenv(),
   ],
 };
 

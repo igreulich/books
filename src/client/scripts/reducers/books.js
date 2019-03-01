@@ -3,6 +3,8 @@ import { createAction, handleActions } from 'redux-actions';
 export const setBooks = createAction('SET_BOOKS');
 export const setBook = createAction('SET_BOOK');
 
+const API_URL = process.env.API_URL; // eslint-disable-line prefer-destructuring
+const API_PORT = process.env.API_PORT; // eslint-disable-line prefer-destructuring
 const initialState = {
   books: [],
   book: {},
@@ -23,17 +25,17 @@ export const reducer = handleActions(
 );
 
 export const fetchBooks = () => (dispatch) => {
-  fetch('//localhost:1138/graphql?query={books{id title series}}')
+  fetch(`//${API_URL}:${API_PORT}/graphql?query={books{id title series number}}`)
     .then(handleErrors) // eslint-disable-line no-use-before-define
     .then(res => res.json())
     .then(json => dispatch(setBooks(json.data.books)));
 };
 
 export const fetchBook = id => (dispatch) => {
-  fetch(`https://my-json-server.typicode.com/igreulich/mock/books/${id}`)
+  fetch(`//${API_URL}:${API_PORT}/graphql?query={book(id: ${id}){title series number}}`)
     .then(handleErrors) // eslint-disable-line no-use-before-define
     .then(res => res.json())
-    .then(json => dispatch(setBook(json)));
+    .then(json => dispatch(setBook(json.data.book)));
 };
 
 // Apparently fetch doesn't handle errors?
