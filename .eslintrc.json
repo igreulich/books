@@ -10,5 +10,8 @@
     "browser": true
   },
   "extends": ["prettier", "airbnb"],
-  "plugins": ["prettier"]
+  "plugins": ["prettier"],
+  "rules": {
+    "max-len": "off"
+  }
 }
