@@ -36,7 +36,7 @@ class App extends Component {
           <Sidebar
             as={Menu}
             animation="uncover"
-            color="green"
+            color="grey"
             direction="right"
             icon="labeled"
             inverted

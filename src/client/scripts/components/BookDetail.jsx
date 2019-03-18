@@ -5,7 +5,6 @@ import {
   Container,
   Icon,
   Item,
-  Label,
 } from 'semantic-ui-react';
 
 export default class BookDetail extends Component {
@@ -30,13 +29,10 @@ export default class BookDetail extends Component {
     const { book } = this.props;
 
     return (
-      <Item.Extra>
-        <Label color="green" basic>{book.series}</Label>
-        <Label color="green" basic>
-          <Icon name="hashtag" fitted />
-          {book.number}
-        </Label>
-      </Item.Extra>
+      <Item.Meta>
+        <span>{book.series}</span>
+        <span>{`#${book.number}`}</span>
+      </Item.Meta>
     );
   }
 
@@ -44,9 +40,9 @@ export default class BookDetail extends Component {
     const { book } = this.props;
 
     return (
-      <Item.Group as={Container} text>
+      <Item.Group as={Container} className="book-detail-container" text>
         <Item>
-          <Icon name="book" size="big" color="green" bordered inverted />
+          <Icon name="book" size="big" color="grey" bordered inverted />
           <Item.Content>
             <Item.Header>{book.title}</Item.Header>
             {(book.series || book.number) && this.renderMetadata()}
