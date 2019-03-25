@@ -14,7 +14,7 @@ const devMode = process.env.NODE_ENV !== 'production';
 
 module.exports = {
   mode: 'development',
-  devtool: 'cheap-eval-source-map',
+  devtool: 'eval-source-map',
   entry: {
     app: ['react-hot-loader/patch', './src/client/index.js'],
   },
@@ -54,6 +54,19 @@ module.exports = {
     historyApiFallback: true,
     hot: true,
     open: true,
+  },
+  optimization: {
+    runtimeChunk: 'single',
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          chunks: 'initial',
+          name: 'vendors',
+          enforce: true,
+        },
+      },
+    },
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
