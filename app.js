@@ -7,7 +7,6 @@ const logger = require('morgan');
 
 const { typeDefs, resolvers } = require('./src/api/graphql/schema');
 const db = require('./src/api/db/knex');
-const booksRouter = require('./src/api/routes/books');
 
 const server = new ApolloServer({
   typeDefs,
@@ -26,8 +25,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-app.use('/api', booksRouter);
 
 server.applyMiddleware({ app });
 
