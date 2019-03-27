@@ -6,6 +6,7 @@ import {
   Icon,
   Item,
 } from 'semantic-ui-react';
+import UpdateBookModalContainer from '../containers/UpdateBookModalContainer';
 
 export default class BookDetail extends Component {
   static propTypes = {
@@ -37,7 +38,7 @@ export default class BookDetail extends Component {
   }
 
   render() {
-    const { book } = this.props;
+    const { book, match } = this.props;
 
     return (
       <Item.Group as={Container} className="book-detail-container" text>
@@ -46,6 +47,9 @@ export default class BookDetail extends Component {
           <Item.Content>
             <Item.Header>{book.title}</Item.Header>
             {(book.series || book.number) && this.renderMetadata()}
+            <Item.Extra>
+              <UpdateBookModalContainer bookId={match.params.id} />
+            </Item.Extra>
           </Item.Content>
         </Item>
       </Item.Group>
