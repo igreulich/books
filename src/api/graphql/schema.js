@@ -31,8 +31,8 @@ const resolvers = {
     updateBook: (_, { id, title, series, number }) => ( // eslint-disable-line object-curly-newline
       Book.query().updateAndFetchById(id, { title, series, number })
     ),
-    createBook: (_, { title, series }) => (
-      Book.query().insert({ title, series })
+    createBook: (_, { title, series, number }) => (
+      Book.query().insert({ title, series, number })
     ),
     deleteBook: (_, { id }) => Book.query().where({ id }).delete(),
   },
