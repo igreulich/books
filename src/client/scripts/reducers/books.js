@@ -68,6 +68,23 @@ export const updateBook = (id, title, series, number) => (dispatch) => { // esli
     });
 };
 
+export const createBook = (title, series, number) => (dispatch) => {
+  fetch(`//${API_URL}:${API_PORT}/graphql`, {
+    method: 'POST',
+    body: JSON.stringify({
+      query: `mutation { createBook(title:"${title}", series:"${series}", number:${number}) { id title series }}`,
+    }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then(handleErrors) // eslint-disable-line no-use-before-define
+    .then(res => res.json())
+    .then((json) => {
+      dispatch(updateBooksData(json.data.createBook));
+    });
+};
+
 // Apparently fetch doesn't handle errors?
 function handleErrors(res) {
   if (!res.ok) {
