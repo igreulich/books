@@ -13,12 +13,13 @@ import {
 export default class UpdateBookModal extends Component {
   static propTypes = {
     book: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-    bookId: PropTypes.string.isRequired, // eslint-disable-line react/forbid-prop-types
-    handleUpdateBook: PropTypes.func.isRequired,
+    bookId: PropTypes.string,
+    handleUpsertBook: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
     book: {},
+    bookId: undefined,
   };
 
   state = {
@@ -34,7 +35,7 @@ export default class UpdateBookModal extends Component {
     const { book } = this.props;
 
     if (!isEqual(prevBook, book)) {
-      this.setState({
+      this.setState({ // eslint-disable-line react/no-did-update-set-state
         title: book.title,
         author: '',
         series: book.series,
@@ -50,15 +51,15 @@ export default class UpdateBookModal extends Component {
   handleChange = (e, { name, value }) => this.setState({ [name]: value });
 
   handleSubmit = () => {
-    const { bookId, handleUpdateBook } = this.props;
-    const { title, author, series, number } = this.state;
+    const { bookId, handleUpsertBook } = this.props;
+    const { title, author, series, number } = this.state; // eslint-disable-line object-curly-newline
 
-    handleUpdateBook(bookId, title, series, number);
+    handleUpsertBook(bookId, title, series, number);
     this.handleClose();
   };
 
   render() {
-    const { title, author, series, modalOpen, number } = this.state;
+    const { title, author, series, modalOpen, number } = this.state; // eslint-disable-line object-curly-newline
 
     return (
       <Modal
