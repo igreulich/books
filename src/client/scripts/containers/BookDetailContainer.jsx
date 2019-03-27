@@ -12,5 +12,4 @@ const mapDispatchToProps = dispatch => ({
   fetchBook: id => dispatch(fetchBook(id)),
 });
 
-
 export default connect(mapStateToProps, mapDispatchToProps)(BookDetail);
