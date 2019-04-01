@@ -59,6 +59,7 @@ export default class UpdateBookModal extends Component {
     const { title, author, series, number } = this.state; // eslint-disable-line object-curly-newline
 
     handleUpsertBook(bookId, title, series, number);
+    this.setState({ title: '', author: '', series: '', number: '' }); // eslint-disable-line object-curly-newline
     this.handleClose();
   };
 
