@@ -14,12 +14,16 @@ export default class UpdateBookModal extends Component {
   static propTypes = {
     book: PropTypes.object, // eslint-disable-line react/forbid-prop-types
     bookId: PropTypes.string,
+    color: PropTypes.string,
     handleUpsertBook: PropTypes.func.isRequired,
+    icon: PropTypes.string,
   };
 
   static defaultProps = {
     book: {},
     bookId: undefined,
+    color: 'blue',
+    icon: 'open',
   };
 
   state = {
@@ -60,6 +64,7 @@ export default class UpdateBookModal extends Component {
 
   render() {
     const { title, author, series, modalOpen, number } = this.state; // eslint-disable-line object-curly-newline
+    const { color, icon } = this.props;
 
     return (
       <Modal
@@ -67,11 +72,10 @@ export default class UpdateBookModal extends Component {
           <Button
             onClick={this.handleOpen}
             floated="right"
-            primary
-            icon
-          >
-            <Icon name="edit" />
-          </Button>
+            color={color}
+            icon={icon}
+            basic
+          />
         )}
         open={modalOpen}
         onClose={this.handleClose}

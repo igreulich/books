@@ -22,10 +22,14 @@ export const reducer = handleActions(
       book: action.payload,
     }),
     [updateBooksData]: (state, action) => {
-      const idx = state.books.findIndex(book => book.id === action.payload.id);
-      const books = state.books.splice();
+      const books = state.books.slice();
+      const idx = books.findIndex(book => book.id === action.payload.id);
 
-      books.splice(idx, 1, action.payload);
+      if (idx > 0) {
+        books.splice(idx, 1, action.payload);
+      } else {
+        books.push(action.payload);
+      }
 
       return {
         ...state,
@@ -50,11 +54,11 @@ export const fetchBook = id => (dispatch) => {
     .then(json => dispatch(setBook(json.data.book)));
 };
 
-export const updateBook = (id, title, series, number) => (dispatch) => { // eslint-disable-line object-curly-newline
+export const updateBook = (id, title, series, number) => (dispatch) => {
   fetch(`//${API_URL}:${API_PORT}/graphql`, {
     method: 'POST',
     body: JSON.stringify({
-      query: `mutation { updateBook(id:"${id}", title:"${title}", series:"${series}", number:${number}) { id title series number }}`,
+      query: `mutation { updateBook(id:"${id}", title:"${title}", series:${series ? `"${series}"` : null}, number:${number}) { id title series number }}`,
     }),
     headers: {
       'Content-Type': 'application/json',
@@ -72,7 +76,7 @@ export const createBook = (title, series, number) => (dispatch) => {
   fetch(`//${API_URL}:${API_PORT}/graphql`, {
     method: 'POST',
     body: JSON.stringify({
-      query: `mutation { createBook(title:"${title}", series:"${series}", number:${number}) { id title series }}`,
+      query: `mutation { createBook(title:"${title}", series:${series ? `"${series}"` : null}, number:${number ? number : null}) { id title series number }}`,
     }),
     headers: {
       'Content-Type': 'application/json',

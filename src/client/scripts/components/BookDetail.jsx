@@ -48,7 +48,7 @@ export default class BookDetail extends Component {
             <Item.Header>{book.title}</Item.Header>
             {(book.series || book.number) && this.renderMetadata()}
             <Item.Extra>
-              <UpdateBookModalContainer bookId={match.params.id} />
+              <UpdateBookModalContainer bookId={match.params.id} color="blue" icon="edit" />
             </Item.Extra>
           </Item.Content>
         </Item>

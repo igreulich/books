@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { updateBook } from '../reducers/books';
+import { createBook } from '../reducers/books';
 
 import UpsertBookModalContainer from '../components/modals/UpsertBookModal';
 
@@ -9,7 +9,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  handleUpsertBook: (id, title, series, number) => dispatch(updateBook(id, title, series, number)), // eslint-disable-line object-curly-newline
+  handleUpsertBook: (_, title, series, number) => dispatch(createBook(title, series, number)), // eslint-disable-line object-curly-newline
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UpsertBookModalContainer);

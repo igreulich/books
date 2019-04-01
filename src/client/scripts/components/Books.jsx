@@ -6,6 +6,7 @@ import {
   Header,
   Table,
 } from 'semantic-ui-react';
+import InsertBookModalContainer from '../containers/InsertBookModalContainer';
 
 import Book from './Book';
 
@@ -32,7 +33,10 @@ export default class Books extends Component {
   render() {
     return (
       <Container text className="book-list">
-        <Header as="h1">The Grey Library</Header>
+        <Header as="h1" floated="left">The Grey Library</Header>
+        <Container textAlign="right" className="book-list-add">
+          <InsertBookModalContainer color="grey" icon="plus" />
+        </Container>
         <Table color="green">
           <Table.Header>
             <Table.Row>
