@@ -76,7 +76,7 @@ export const createBook = (title, series, number) => (dispatch) => {
   fetch(`//${API_URL}:${API_PORT}/graphql`, {
     method: 'POST',
     body: JSON.stringify({
-      query: `mutation { createBook(title:"${title}", series:${series ? `"${series}"` : null}, number:${number ? number : null}) { id title series number }}`,
+      query: `mutation { createBook(title:"${title}", series:${series ? `"${series}"` : null}, number:${number ? number : null}) { id title series number }}`, // eslint-disable-line no-unneeded-ternary
     }),
     headers: {
       'Content-Type': 'application/json',
@@ -86,6 +86,23 @@ export const createBook = (title, series, number) => (dispatch) => {
     .then(res => res.json())
     .then((json) => {
       dispatch(updateBooksData(json.data.createBook));
+    });
+};
+
+export const deleteBook = id => (dispatch) => {
+  fetch(`//${API_URL}:${API_PORT}/graphql`, {
+    method: 'POST',
+    body: JSON.stringify({
+      query: `mutation { deleteBook(id:${id}) }`,
+    }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then(handleErrors) // eslint-disable-line no-use-before-define
+    .then(res => res.json)
+    .then(() => {
+      dispatch(fetchBooks());
     });
 };
 

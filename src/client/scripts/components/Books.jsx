@@ -8,7 +8,7 @@ import {
 } from 'semantic-ui-react';
 import InsertBookModalContainer from '../containers/InsertBookModalContainer';
 
-import Book from './Book';
+import BookContainer from '../containers/BookContainer';
 
 export default class Books extends Component {
   static propTypes = {
@@ -27,7 +27,7 @@ export default class Books extends Component {
   renderBooks = () => {
     const { books } = this.props;
 
-    return books.map(book => <Book key={book.id} book={book} />);
+    return books.map(book => <BookContainer key={book.id} book={book} />);
   };
 
   render() {
@@ -44,6 +44,7 @@ export default class Books extends Component {
               <Table.HeaderCell>Author</Table.HeaderCell>
               <Table.HeaderCell>Series</Table.HeaderCell>
               <Table.HeaderCell>Number</Table.HeaderCell>
+              <Table.HeaderCell>&nbsp;</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
 

@@ -1,31 +1,49 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { Table } from 'semantic-ui-react';
+import {
+  Button,
+  Icon,
+  Table,
+} from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
-const Book = (props) => {
-  const { book } = props;
+export default class Book extends Component {
+  static propTypes = {
+    book: PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      author: PropTypes.string,
+      series: PropTypes.string,
+      number: PropTypes.number,
+    }).isRequired,
+    deleteBook: PropTypes.func,
+  };
 
-  return (
-    <Table.Row>
-      <Table.Cell><Link to={`/book/${book.id}`}>{book.title}</Link></Table.Cell>
-      <Table.Cell>{book.author}</Table.Cell>
-      <Table.Cell>{!!book.series && book.series}</Table.Cell>
-      <Table.Cell>{!!book.number && book.number}</Table.Cell>
-    </Table.Row>
-  );
-};
+  static defaultProps = {
+    deleteBook: () => {},
+  };
 
-Book.propTypes = {
-  book: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    author: PropTypes.string.isRequired,
-    series: PropTypes.string,
-    number: PropTypes.number,
-  }).isRequired,
-};
+  handleDeleteBook = () => {
+    const { book, deleteBook } = this.props;
 
-Book.defaultProps = {};
+    deleteBook(book.id);
+  };
 
-export default Book;
+  render() {
+    const { book } = this.props;
+
+    return (
+      <Table.Row>
+        <Table.Cell><Link to={`/book/${book.id}`}>{book.title}</Link></Table.Cell>
+        <Table.Cell>{book.author}</Table.Cell>
+        <Table.Cell>{!!book.series && book.series}</Table.Cell>
+        <Table.Cell>{!!book.number && book.number}</Table.Cell>
+        <Table.Cell>
+          <Button.Group size="tiny">
+            <Button basic icon color="red" onClick={this.handleDeleteBook}><Icon name="minus" /></Button>
+          </Button.Group>
+        </Table.Cell>
+      </Table.Row>
+    );
+  }
+}
