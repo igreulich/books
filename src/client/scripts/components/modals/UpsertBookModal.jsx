@@ -6,7 +6,6 @@ import {
   Button,
   Form,
   Header,
-  Icon,
   Modal,
 } from 'semantic-ui-react';
 
