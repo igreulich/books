@@ -1,6 +1,9 @@
 const path = require('path');
 
-// Update with your config settings.
+if (!process.env.CONFIG_LOADED) {
+  require('dotenv').config(); // eslint-disable-line
+}
+
 module.exports = {
   development: {
     client: 'mysql2',
