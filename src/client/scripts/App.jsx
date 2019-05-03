@@ -12,6 +12,8 @@ import { Route, Link } from 'react-router-dom';
 import Head from './components/Head';
 import BooksContainer from './containers/BooksContainer';
 import BookDetailContainer from './containers/BookDetailContainer';
+import AuthorsContainer from './containers/AuthorsContainer';
+import AuthorDetailContainer from './continers/AuthorDetailContainer';
 import Foot from './components/Foot';
 
 import '@babel/polyfill';
@@ -61,6 +63,8 @@ class App extends Component {
           <Sidebar.Pusher>
             <Route path="/books" component={BooksContainer} />
             <Route path="/book/:id" component={BookDetailContainer} />
+            <Route path="/authors" component={AuthorsContainer} />
+            <Route path="/author/:id" component={AuthorDetailContainer} />
           </Sidebar.Pusher>
         </Sidebar.Pushable>
         <Foot />

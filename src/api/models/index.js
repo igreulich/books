@@ -1,3 +1,6 @@
+/* eslint-disable global-require */
+
 module.exports = {
-  Book: require('./book'), // eslint-disable-line global-require
+  Book: require('./book'),
+  Author: require('./author'),
 };
