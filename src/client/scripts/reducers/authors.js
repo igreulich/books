@@ -24,8 +24,25 @@ export const reducer = handleActions(
 );
 
 export const fetchAuthors = () => (dispatch) => {
-  fetch(`//${API_URL}:${API_PORT}/graphql?query={authors{id title series number}}`)
+  fetch(`//${API_URL}:${API_PORT}/graphql?query={authors{id name}}`)
     .then(handleErrors) // eslint-disable-line no-use-before-define
     .then(res => res.json())
     .then(json => dispatch(setAuthors(json.data.authors)));
+};
+
+export const deleteAuthor = id => (dispatch) => {
+  fetch(`//${API_URL}:${API_PORT}/graphql`, {
+    method: 'POST',
+    body: JSON.stringify({
+      query: `mutation { deleteAuthor(id:${id}) }`,
+    }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then(handleErrors)
+    .then(res => res.json)
+    .then(() => {
+      dispatch(fetchAuthors());
+    });
 };

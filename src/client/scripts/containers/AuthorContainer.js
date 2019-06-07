@@ -1,13 +1,13 @@
 import { connect } from 'react-redux';
 
-import { deleteBook } from '../reducers/books';
+import { deleteAuthor } from '../reducers/authors';
 
-import Book from '../components/Book';
+import Author from '../components/Author';
 
 const mapStateToProps = () => ({});
 
 const mapDispatchToProps = dispatch => ({
-  deleteBook: id => dispatch(deleteBook(id)),
+  deleteAuthor: id => dispatch(deleteAuthor(id)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Book);
+export default connect(mapStateToProps, mapDispatchToProps)(Author);

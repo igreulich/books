@@ -8,39 +8,35 @@ import {
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
-export default class Book extends Component {
+export default class Author extends Component {
   static propTypes = {
-    book: PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      author: PropTypes.string,
-      series: PropTypes.string,
-      number: PropTypes.number,
+    author: PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string.isRequired,
     }).isRequired,
-    deleteBook: PropTypes.func,
+    deleteAuthor: PropTypes.func,
   };
 
   static defaultProps = {
-    deleteBook: () => {},
+    deleteAuthor: () => {},
   };
 
-  handleDeleteBook = () => {
-    const { book, deleteBook } = this.props;
+  handleDeleteAuthor = () => {
+    const { author, deleteAuthor } = this.props;
 
-    deleteBook(book.id);
+    deleteAuthor(author.id);
   };
 
   render() {
-    const { book } = this.props;
+    const { author } = this.props;
 
     return (
       <Table.Row>
-        <Table.Cell><Link to={`/book/${book.id}`}>{book.title}</Link></Table.Cell>
-        <Table.Cell>{book.author}</Table.Cell>
-        <Table.Cell>{!!book.series && book.series}</Table.Cell>
-        <Table.Cell>{!!book.number && book.number}</Table.Cell>
+        <Table.Cell><Link to={`/author/${author.id}`}>{author.name}</Link></Table.Cell>
+        <Table.Cell>{' '}</Table.Cell>
         <Table.Cell>
           <Button.Group size="tiny">
-            <Button basic icon color="red" onClick={this.handleDeleteBook}><Icon name="minus" /></Button>
+            <Button basic icon color="red" onClick={this.handleDeleteAuthor}><Icon name="minus" /></Button>
           </Button.Group>
         </Table.Cell>
       </Table.Row>

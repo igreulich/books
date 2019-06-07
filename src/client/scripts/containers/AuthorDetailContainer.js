@@ -1,15 +1,15 @@
 import { connect } from 'react-redux';
 
-import { fetchBook } from '../reducers/books';
+import { fetchAuthors } from '../reducers/authors';
 
-import BookDetail from '../components/BookDetail';
+import AuthorDetail from '../components/AuthorDetail';
 
 const mapStateToProps = state => ({
-  book: state.books.book,
+  author: state.authors.author,
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchBook: id => dispatch(fetchBook(id)),
+  fetchAuthor: id => dispatch(fetchAuthors(id)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(BookDetail);
+export default connect(mapStateToProps, mapDispatchToProps)(AuthorDetail);

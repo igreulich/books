@@ -13,7 +13,7 @@ import Head from './components/Head';
 import BooksContainer from './containers/BooksContainer';
 import BookDetailContainer from './containers/BookDetailContainer';
 import AuthorsContainer from './containers/AuthorsContainer';
-import AuthorDetailContainer from './continers/AuthorDetailContainer';
+import AuthorDetailContainer from './containers/AuthorDetailContainer';
 import Foot from './components/Foot';
 
 import '@babel/polyfill';
@@ -50,7 +50,7 @@ class App extends Component {
               <Icon name="book" />
               Collection
             </Menu.Item>
-            <Menu.Item as="a">
+            <Menu.Item as={Link} to="/authors">
               <Icon name="user" />
               Authors
             </Menu.Item>

@@ -5,11 +5,11 @@ import { fetchAuthors } from '../reducers/authors';
 import Authors from '../components/Authors';
 
 const mapStateToProps = state => ({
-  books: state.authors.authorss,
+  authors: state.authors.authors,
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchBooks: () => dispatch(fetchAuthors()),
+  fetchAuthors: () => dispatch(fetchAuthors()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Authors);

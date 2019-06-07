@@ -10,7 +10,7 @@ import InsertAuthorModalContainer from '../containers/InsertAuthorModalContainer
 
 import AuthorContainer from '../containers/AuthorContainer';
 
-export default class Books extends Component {
+export default class Authors extends Component {
   static propTypes = {
     authors: PropTypes.arrayOf(PropTypes.object).isRequired,
     fetchAuthors: PropTypes.func.isRequired,
@@ -24,10 +24,10 @@ export default class Books extends Component {
     fetchAuthors();
   }
 
-  renderBooks = () => {
+  renderAuthors = () => {
     const { authors } = this.props;
 
-    return authors.map(author => <AuthorContainer key={author.id} book={author} />);
+    return authors.map(author => <AuthorContainer key={author.id} author={author} />);
   };
 
   render() {
