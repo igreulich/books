@@ -4,7 +4,7 @@
   "description": "An app to catalogue books",
   "scripts": {
     "start:client": "webpack-dev-server --config webpack.dev.js",
-    "start:api": "nodemon --exec 'node -r dotenv/config' ./bin/www",
+    "start:api": "rails server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [

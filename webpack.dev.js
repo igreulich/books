@@ -16,7 +16,7 @@ module.exports = {
   mode: 'development',
   devtool: 'eval-source-map',
   entry: {
-    app: ['react-hot-loader/patch', './src/client/index.js'],
+    app: ['react-hot-loader/patch', './app/client/index.js'],
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -73,7 +73,7 @@ module.exports = {
     new webpack.NamedModulesPlugin(),
     new MiniCssExtractPlugin({ filename: devMode ? '[name].css' : '[name].[hash].css' }),
     new HtmlWebpackPlugin({
-      template: './src/client/templates/index.html',
+      template: './app/client/templates/index.html',
       title: "Greulich's Books",
     }),
     new Dotenv(),
