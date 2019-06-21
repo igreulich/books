@@ -42,6 +42,8 @@ GEM
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    addressable (2.6.0)
+      public_suffix (>= 2.0.2, < 4.0)
     arel (9.0.0)
     bcrypt (3.1.13)
     bootsnap (1.4.4)
@@ -76,6 +78,10 @@ GEM
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
     jwt (2.2.1)
+    launchy (2.4.3)
+      addressable (~> 2.3)
+    letter_opener (1.7.0)
+      launchy (~> 2.2)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -98,6 +104,7 @@ GEM
     nokogiri (1.10.3)
       mini_portile2 (~> 2.4.0)
     orm_adapter (0.5.0)
+    public_suffix (3.1.0)
     puma (3.12.1)
     rack (2.0.7)
     rack-test (1.1.0)
@@ -168,6 +175,7 @@ DEPENDENCIES
   byebug
   devise
   devise-jwt
+  letter_opener
   listen (>= 3.0.5, < 3.2)
   mysql2 (~> 0.5.0)
   puma (~> 3.11)
