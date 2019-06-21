@@ -10,40 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2019_06_21_133610) do
 
-  create_table "authors", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name", null: false
-    t.timestamp "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
-    t.timestamp "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "books", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "title", null: false
-    t.string "author", null: false
-    t.string "series"
-    t.integer "number"
-    t.timestamp "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
-    t.timestamp "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
-  end
-
-  create_table "books_authors", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "book_id", unsigned: true
-    t.integer "authors_id", unsigned: true
-    t.index ["authors_id"], name: "books_authors_authors_id_foreign"
-    t.index ["book_id"], name: "books_authors_book_id_foreign"
-  end
-
-  create_table "knex_migrations", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name"
-    t.integer "batch"
-    t.timestamp "migration_time", default: -> { "CURRENT_TIMESTAMP" }, null: false
-  end
-
-  create_table "knex_migrations_lock", primary_key: "index", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "is_locked"
-  end
-
-  add_foreign_key "books_authors", "authors", column: "authors_id", name: "books_authors_authors_id_foreign"
-  add_foreign_key "books_authors", "books", name: "books_authors_book_id_foreign"
 end
