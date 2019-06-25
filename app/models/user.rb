@@ -6,8 +6,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
-         :jwt_authenticatable,
-         jwt_revocation_strategy: JWTBlacklist
+         :jwt_authenticatable, jwt_revocation_strategy: JWTBlacklist
 
   private
   # see https://stackoverflow.com/questions/3808782/rails-best-practice-how-to-create-dependent-has-one-relations
