@@ -1,36 +1,33 @@
 class BooksController < ApplicationController
   # The instance variable in load_book is available to the calling method
-  before_action :load_book, only: [:update, :destroy]
+  before_action :load_book, only: [:show, :update, :destroy]
 
   def index
     @books = Book.all
+
+    render json: @books
+  end
+
+  def show
+    render_resource(@book)
   end
 
   def create
     @book = Book.new(book_params)
 
-    if @book.save
-      # respond to JSON
-      redirect_to [:books] # respond to JSON
-    else
-      # not so much redirect, return an error response
-      render :new
-    end
+    @book.save
+    render_resource(@book)
   end
 
   def update
-    if @book.update(book_params)
-      # respond to JSON
-      redirect_to [:books]
-    else
-      # not so much redirect, return an error response
-      render :edit
-    end
+    @book.update(book_params)
+    render_resource(@book)
   end
 
   def destroy
     @book.destroy
-    redirect_to [:books]
+
+    render json: Book.all
   end
 
   private
