@@ -1,36 +1,33 @@
 class AuthorsController < ApplicationController
   # The instance variable in load_author is available to the calling method
-  before_action :load_author, only: [:update, :destroy]
+  before_action :load_author, only: [:show, :update, :destroy]
 
   def index
     @authors = Author.all
+
+    render json: @authors
+  end
+
+  def show
+    render_resource(@author)
   end
 
   def create
     @author = Author.new(author_params)
 
-    if @author.save
-      # respond to JSON
-      redirect_to [:authors] # respond to JSON
-    else
-      # not so much redirect, return an error response
-      render :new
-    end
+    @author.save
+    render_resource(@author)
   end
 
   def update
-    if @author.update(author_params)
-      # respond to JSON
-      redirect_to [:authors]
-    else
-      # not so much redirect, return an error response
-      render :edit
-    end
+    @author.update(author_params)
+    render_resource(@author)
   end
 
   def destroy
     @author.destroy
-    redirect_to [:authors]
+
+    render json: Author.all
   end
 
   private
