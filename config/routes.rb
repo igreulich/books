@@ -12,6 +12,9 @@ Rails.application.routes.draw do
                    sessions: 'sessions',
                    registrations: 'registrations'
                  }
+
+      resources :books, only: [:index, :create, :show, :update, :destroy]
+      resources :authors, only: [:index, :create, :show, :update, :destroy]
     end
   end
 end
