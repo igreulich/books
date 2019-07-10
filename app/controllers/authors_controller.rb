@@ -3,7 +3,7 @@ class AuthorsController < ApplicationController
   before_action :load_author, only: [:show, :update, :destroy]
 
   def index
-    @authors = Author.all
+    @authors = Author.includes(:books)
 
     render json: @authors
   end
@@ -31,11 +31,11 @@ class AuthorsController < ApplicationController
   end
 
   private
-  def load_article
+  def load_author
     @author ||= Author.find(params[:id])
   end
 
   def author_params
-    params.require(:author).permit(:name)
+    params.require(:author).permit(:name, {:book_ids=>[]})
   end
 end
