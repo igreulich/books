@@ -14,7 +14,7 @@ class CreateBooksAndAuthors < ActiveRecord::Migration[5.2]
       t.timestamps
     end
 
-    create_table :books_authors, id: false do |t|
+    create_table :authors_books, id: false do |t|
       t.belongs_to :book, index: true
       t.belongs_to :author, index: true
     end

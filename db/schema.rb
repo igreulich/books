@@ -18,19 +18,19 @@ ActiveRecord::Schema.define(version: 2019_07_01_184259) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "authors_books", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "book_id"
+    t.bigint "author_id"
+    t.index ["author_id"], name: "index_authors_books_on_author_id"
+    t.index ["book_id"], name: "index_authors_books_on_book_id"
+  end
+
   create_table "books", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.string "series"
     t.integer "number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "books_authors", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "book_id"
-    t.bigint "author_id"
-    t.index ["author_id"], name: "index_books_authors_on_author_id"
-    t.index ["book_id"], name: "index_books_authors_on_book_id"
   end
 
   create_table "jwt_blacklist", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
