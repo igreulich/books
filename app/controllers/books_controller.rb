@@ -1,11 +1,9 @@
 class BooksController < ApplicationController
-  # The instance variable in load_book is available to the calling method
+  # The instance variables in these functions are available to the calling methods
   before_action :load_book, only: [:show, :update, :destroy]
+  before_action :load_books, only: [:index, :destroy]
 
   def index
-    @books = Book.includes(:authors)
-
-    render json: @books
   end
 
   def show
@@ -16,21 +14,25 @@ class BooksController < ApplicationController
     @book = Book.new(book_params)
 
     @book.save
+
     render_resource(@book)
   end
 
   def update
     @book.update(book_params)
+
     render_resource(@book)
   end
 
   def destroy
     @book.destroy
-
-    render json: Book.all
   end
 
   private
+  def load_books
+    @books = Book.includes(:authors)
+  end
+
   def load_book
     @book ||= Book.find(params[:id])
   end
