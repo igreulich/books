@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_01_184259) do
+ActiveRecord::Schema.define(version: 2019_07_12_171553) do
 
   create_table "authors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -31,6 +31,13 @@ ActiveRecord::Schema.define(version: 2019_07_01_184259) do
     t.integer "number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "books_libraries", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "book_id"
+    t.bigint "library_id"
+    t.index ["book_id"], name: "index_books_libraries_on_book_id"
+    t.index ["library_id"], name: "index_books_libraries_on_library_id"
   end
 
   create_table "jwt_blacklist", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
