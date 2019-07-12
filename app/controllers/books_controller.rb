@@ -30,11 +30,11 @@ class BooksController < ApplicationController
 
   private
   def load_books
-    @books = Book.includes(:authors)
+    @books ||= Book.includes(:authors)
   end
 
   def load_book
-    @book ||= Book.find(params[:id])
+    @book ||= Book.includes(:authors).find(params[:id])
   end
 
   def book_params

@@ -30,11 +30,11 @@ class AuthorsController < ApplicationController
 
   private
   def load_authors
-    @authors = Author.includes(:books)
+    @authors ||= Author.includes(:books)
   end
 
   def load_author
-    @author ||= Author.find(params[:id])
+    @author ||= Author.includes(:books).find(params[:id])
   end
 
   def author_params
